@@ -1,0 +1,295 @@
+<section data-ng-controller="ContratsController">
+    <div class="page-header">
+        <h1>Nouveau Contrat</h1>
+    </div>
+    <div class="col-md-6" "well" >
+
+<pre>nbcontrats lus: {{$scope.nbcontrats}}</pre>
+<pre>nbcontrats lus: {{nbrefinancements}}</pre>
+<pre>nbcontrats lus: {{nbecomonies}}</pre>
+<button id="initdef" ng-click="initdefaultctrt()">initialisation ctrt default</button>
+<pre>{{$scope | json }}</pre>
+{{2+2}}
+<br>
+<pre>{{$scope.topnumcontrat()}}</pre>
+
+
+     <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                 <div class="form-group">
+
+<!-- Bu -->
+                  <label class="control-label" for="bu">B.U.*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="bu" id="bu" class="form-control" placeholder="bu" value="EVL" keep-current-value required >
+                        <input type="radio" ng-model="bu" value= "EVL" />Evoliance
+                        <input type="radio" ng-model="bu" value= "UBS" />Ubique systemes
+                        <input type="radio" ng-model="bu" value= "HBO" />Hub One
+                    </div>
+<!-- name -->
+                    <div ng-hide=true>
+                        <label class="control-label" for="name">Nom</label>    
+                        <div class="controls">
+                            <input type="text" data-ng-model="name" id="name" class="form-control"  placeholder="Nom contrat" value="nomfantome" keep-current-value required >
+                        </div>
+                    </div>
+<!-- typeactif -->
+                    <label class="control-label" for="typeactif">Type d'actif finance*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="typeactif" id="typeactif" class="form-control" value="technologique" placeholder="typeactif" keep-current-value required>    
+                        <input type="radio" ng-model="typeactif" value="technologique" />Technologique (informatique/réseau/téléphonie/vidéo)
+                        <input type="radio" ng-model="typeactif" value="industriel" />Industriel
+                        <input type="radio" ng-model="typeactif" value="medical" />Médical
+                        <input type="radio" ng-model="typeactif" value="immateriel" />Immatériel
+                    </div>
+                    <br/>
+<!-- ctrtnum -->
+                    <label class="control-label" for="ctrtnum">Numero de contrat*</label>
+                    <div class="controls">
+                        <input type="number" min=1000 max=9999 data-ng-model="ctrtnum" id="ctrtnum" class="form-control" placeholder="Numero contrat"  value=1000 ng-change='memenum()' ng-focus='memenum()' keep-current-value required>
+                    </div>
+<!-- locataire -->
+                    
+                    <label class="control-label" for="locataire">Locataire*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="locataire" id="locataire" class="form-control" value="monlocataire" placeholder="locataire"  required>
+                    </div>
+
+<!-- siren -->
+                    <label class="control-label" for="siren">Numero SIREN*</label>
+                    <div class="controls">
+                        <input type="number" min=111111111 max=999999999 data-ng-model="siren"   id="siren" class="form-control" placeholder="siren" value=999999999 keep-current-value required>
+                    </div>
+                    
+<!-- refinanceur -->
+                    <label class="control-label" for="refinanceur">Refinanceur*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="refinanceur" id="refinanceur" class="form-control" value="Siemens" placeholder="refinanceur" keep-current-value required>
+                        <input type="radio" ng-model="refinanceur" value="Indefini" />Indefini
+                        <input type="radio" ng-model="refinanceur" value="Siemens" />Siemens
+                        <input type="radio" ng-model="refinanceur" value="Ge Cap" />Ge capital
+                        <input type="radio" ng-model="refinanceur" value="Leascom" />Leascom
+                        <input type="radio" ng-model="refinanceur" value="LorEquip" />LorEquip<br />
+                    </div>
+<!-- consultant -->
+                    <label class="control-label" for="consultant">Consultant*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="consultant" id="consultant" class="form-control" placeholder="consultant" value="pake" keep-current-value required >
+                        <input type="radio" ng-model="consultant" value= "pake" />Pake
+                        <input type="radio" ng-model="consultant" value= "mali" />Mali
+                        <input type="radio" ng-model="consultant" value= "chde" />Chde
+                    </div>
+
+<!-- partenaire -->
+                    <label class="control-label" for="partenaire">Fournisseur/Partenaire</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="partenaire" id="partenaire" class="form-control" placeholder="partenaire" value="mon partenaire">
+                    </div>
+           
+<!-- duree -->
+                    <label class="control-label" for="duree">Duree location*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="duree" id="duree" class="form-control" placeholder="duree" value=48 keep-current-value required>
+                        <input type="radio" ng-model="duree" value= 24 />24 mois
+                        <input type="radio" ng-model="duree" value= 30 />30 mois
+                        <input type="radio" ng-model="duree" value= 36 />36 mois
+                        <input type="radio" ng-model="duree" value= 42 />42 mois
+                        <input type="radio" ng-model="duree" value= 48 />48 mois
+                        <input type="radio" ng-model="duree" value= 60 />60 mois
+                        <input type="radio" ng-model="duree" value= 72 />72 mois
+                        <br />
+                    </div>
+
+<!-- periodicite -->
+                    <label class="control-label" for="periodicite">Periodicite loyers*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="periodicite" id="periodicite" class="form-control" placeholder="periodicite" value="tri" keep-current-value required>
+                        <input type="radio" ng-model="periodicite" value= "mens" />Mensuel
+                        <input type="radio" ng-model="periodicite" value= "tri" />Trimestriel
+                    </div>
+
+<!-- nbperiode -->
+                    <label class="control-label" for="nbperiode">Nombre de loyers*</label>
+                    <div class="controls">
+                        <input type="number" placeholder="nbperiode" data-ng-model="nbperiode" value=0 ng-init="nbperiode='{{duree/3}}'" keep-current-value required/>
+                    </div>
+
+<!-- loyer -->
+                    <label class="control-label" for="loyer">Montant loyer*</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="loyer" id="loyer" class="form-control" placeholder="loyer" value=0 keep-current-value required>
+                    </div>
+                    
+<!-- drfnum -->
+                    <label class="control-label" for="drfnum">Numéro DFi*</label>
+                    <div class="controls">
+                        <input type="number" min=1000 max=9999 name="drfnum" data-ng-model="drfnum" id="drfnum" class="form-control" value=1000 keep-current-value  required>
+                    </div>
+                    <br>
+                    <select ng-model="drfnum" ng-options="drfnum as refinancement.drfnum for refinancement in refinancements track by refinancement.id">
+                    <option value={{drfnum}}>selection un num DFi</option>            
+                    </select>
+                    <br/>
+
+<!-- econum -->
+                    <label class="control-label" for="econum">Numéro de Fico</label>
+                    <div class="controls">
+                        <input type="number" min=1000 max=9999 data-ng-model="econum" id="econum" class="form-control" value=1000 keep-current-value required>
+                    </div>
+                    <select name="seconum" ng-model="econum" ng-options="econum as ecomony.drfnum for ecomony in Ecomonies">
+                     <option value={{econum}}>Sélectionnez un num Econum</option>
+                    </select>
+                    <br/>
+
+      
+<!-- etatrefinct -->
+                   <label class="control-label" for="etatrefinct">Statut refinancement</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="etatrefinct" id="etatrefinct" class="form-control" placeholder="etatrefinct" value="non defini" keep-current-value required>
+                        <input type="radio" ng-model="etatrefinct" value= 'non defini' />non defini
+                        <input type="radio" ng-model="etatrefinct" value= "score" />scoré
+                        <input type="radio" ng-model="etatrefinct" value= "attente pieces" />attente pieces
+                        <input type="radio" ng-model="etatrefinct" value= "accord partiel" />accord partiel
+                        <input type="radio" ng-model="etatrefinct" value= "accord conditionnel" />accord sous conditions
+                        <input type="radio" ng-model="etatrefinct" value= "accord complet"/>accord complet
+                        <input type="radio" ng-model="etatrefinct" value= "refus provisoire" />refus provisoire
+                        <input type="radio" ng-model="etatrefinct" value= "refus definitif" />refus definitif
+                        <br />
+                    </div>
+    
+<!-- etatcession -->
+                   <label class="control-label" for="etatcession">Statut cession</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="etatcession" id="etatcession" class="form-control" placeholder="etatcession" value="non defini" keep-current-value  required>
+                        <input type="radio" ng-model="etatcession" value= 'non defini' />non defini
+                        <input type="radio" ng-model="etatcession" value= 'autoporte' />dossier autoporte
+                        <input type="radio" ng-model="etatcession" value= 'prorata' />prorata en cours
+                        <input type="radio" ng-model="etatcession" value= 'cede' />dossier cédé
+                        <input type="radio" ng-model="etatcession" value= 'rachete' />dossier racheté
+                        <br />
+                    </div>
+    
+<!-- etatdenonc -->
+                   <label class="control-label" for="etatdenonc">Statut dénonciation</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="etatdenonc" id="etatdenonc" class="form-control" placeholder="etatdenonc" value="non defini" keep-current-value required>
+                        <input type="radio" ng-model="etatdenonc" value= 'non defini' />non defini
+                        <input type="radio" ng-model="etatdenonc" value= 'denonce valide' />denonce valide
+                        <input type="radio" ng-model="etatdenonc" value= 'hors delais' />hors délais
+                        <input type="radio" ng-model="etatdenonc" value= 'attente denonce' />non denoncé 
+
+                        <br />
+                    </div>
+
+<!-- etatvie -->
+                   <label class="control-label" for="etatvie">Statut cycle de vie du contrat</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="etatvie" id="etatvie" class="form-control" placeholder="etatvie" value="non defini" keep-current-value  required>
+                        <input type="radio" ng-model="etatvie" value= 'non defini' />non defini
+                        <input type="radio" ng-model="etatvie" value= 'creation' />en creation
+                        <input type="radio" ng-model="etatvie" value= 'normal' />normal
+                        <input type="radio" ng-model="etatvie" value= 'evolution' />evolution
+                        <input type="radio" ng-model="etatvie" value= 'prolong' />prolong
+                        <input type="radio" ng-model="etatvie" value= 'fvm' />rachat FVM
+                        <input type="radio" ng-model="etatvie" value= 'cloture' />cloture
+                        <br />
+                    </div>
+
+<!-- etatrglt -->
+                  <label class="control-label" for="etatrglt">Etat des reglements</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="etatrglt" id="etatrglt" class="form-control" placeholder="etat des reglement" value="non defini" keep-current-value required>
+                        <input type="radio" ng-model="etatrglt" value= 'non defini' />non defini
+                        <input type="radio" ng-model="etatrglt" value= 'ok' />pas d'incidents
+                        <input type="radio" ng-model="etatrglt" value= 'impaye' />impaye en cours
+                        <input type="radio" ng-model="etatrglt" value= 'incident' />incident de reglement
+                        <input type="radio" ng-model="etatrglt" value= 'pc' />procedure colective
+                        <br />
+                    </div>
+
+<!-- suiviadm -->
+                    <label class="control-label" for="suiviadm">Suivi adminkistratif</label>
+                         <input type="checkbox" data-ng-model="visusuiviadm"> 
+                    <div class="controls" ng-show ="visusuiviadm">
+                    <br>
+                       <ul>
+                       <li><label>Scan effectué:<input type="checkbox" ng-model="ctrtscantg"></label></li>
+                        <li><label>Mad facturée:<input type="checkbox" ng-model="ctrtmadfacturetg"></label></li>
+                        <li><label>MAd prélevé:<input type="checkbox" ng-model="ctrtmadprelevtg"></label></li>
+                        <li><label>RUM :<input type="checkbox" ng-model="ctrtrumtg"><input type="number" ng-model="ctrtrumnum"></label></li>
+                        <br>
+                        <li><label class="control-label" for="ctrtdenvoidossierrefi">date envoi du dossier au refi</label>
+                            <div class="controls">
+                                <input type="date" data-ng-model="ctrtdenvoidossierrefi" id="ctrtdenvoidossierrefi" class="form-control" placeholder="Date envoi dossier refi" >
+                            </div>
+                        </li>
+                        </ul>
+                        <br>
+                    </div>
+                    <br/>
+
+<!-- dates -->
+                    <label class="control-label" for="ctrtdsignature">Date signature PV contrat</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="ctrtdsignature" id="ctrtdsignature" class="form-control" placeholder="Date sign pv contrat" required>
+                    </div>
+
+                    <label class="control-label" for="ctrtddebut">Date de début de contrat</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="ctrtddebut" id="ctrtddebut" class="form-control" placeholder="Date debut contrat piece complete" >
+                    </div>
+
+                    <label class="control-label" for="ctrtdcession">Date de cession de contrat</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="ctrtdcession" id="ctrtdcession" class="form-control" placeholder="Date cession contrat" >
+                    </div>
+
+                    <label class="control-label" for="crtrtdlim">Date limite dénonciation contrat</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="crtrtdlim" id="crtrtdlim" class="form-control" placeholder="Date limite denonc contrat" >
+                    </div>
+
+                    <label class="control-label" for="ctrtdfin">Date de fin de contrat prévue</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="ctrtdfin" id="ctrtdfin" class="form-control" placeholder="Date fin nominale contrat" >
+                    </div>
+
+                    <label class="control-label" for="ctrtddenonc">Date de dénonciation effective du contrat </label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="ctrtddenonc" id="ctrtddenonc" class="form-control" placeholder="Date denonc effective contrat" >
+                    </div>
+
+                    <label class="control-label" for="ctrtdcloture">Date de cloture du contat</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="ctrtdcloture" id="ctrtdcloture" class="form-control" placeholder="Date cloture contrat" >
+                    </div>
+
+                    <label class="control-label" for="ctrtcommentaire">Commentaires Commerciaux</label>
+                    <div class="controls">
+                        <textarea name="ctrtcommentaire" data-ng-model="ctrtcommentaire" id="ctrtcommentaire" class="form-control" cols="30" rows="5" placeholder="Commentaires commerciaux"></textarea>
+                    </div>
+
+                    <label class="control-label" for="ctrtcommentaireadm">Commentaires Administratifs</label>
+                    <div class="controls">
+                        <textarea name="ctrtcommentaire" data-ng-model="ctrtcommentaireadm" id="ctrtcommentaireadm" class="form-control" cols="30" rows="5" placeholder="Commentaires administratifs"></textarea>
+                    </div>
+
+                    <label class="control-label" for="ctrtcommentairerglt">Commentaires RIC \(reglements incidents contentieux\)</label>
+                    <div class="controls">
+                        <textarea name="ctrtcommentaire" data-ng-model="ctrtcommentairerglt" id="ctrtcommentairerglt" class="form-control" cols="30" rows="5" placeholder="Commentaires reglements"></textarea>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</div> 
+            </fieldset>
+        </form>
+    </div>
+
+</section>

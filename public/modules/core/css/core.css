@@ -1,0 +1,65 @@
+.content {
+	margin-top: 70px;
+}
+.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+.myGrid {
+    width: 1600px;
+    height: 800px;
+ }
+
+.grid {
+  width: 1200px;
+  height: 400px;
+}
+
+.grid .ui-grid-row .blue {
+  background-color: #0000FF;
+}
+
+.grid .ui-grid-row .pink {
+  background-color: #FFC0CB;
+}
+
+.grid .ui-grid-row .orange {
+  background-color: orange;
+}
+
+.grid .ui-grid-row .yellow {
+  background-color: yellow;
+}
+
+.grid .ui-grid-row .green {
+  background-color: #FFFF00;
+}
+
+.grid .ui-grid-row .red {
+  background-color: red;
+}
+
+.grid .ui-grid-row .black {
+  background-color: black;
+}
+.grid .ui-grid-row .white {
+  background-color: white;
+}
+
+.well input {
+  margin-bottom: 10px;
+}
+
+.directive {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  background-color: #ACF0F2;
+}

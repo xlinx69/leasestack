@@ -1,0 +1,185 @@
+<section data-ng-controller="EcomoniesController">
+    <div class="page-header">
+        <h1>Nouvelle Fiche Ecomonique</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+               <div class="form-group" "well">
+                   
+                  <label class="control-label" for="bu">BU*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="bu" id="bu" class="form-control" placeholder="bu" required >
+                        <input type="radio" ng-model="bu" value= "EVL" />Evoliance
+                        <input type="radio" ng-model="bu" value= "UBS" />Ubique systemes
+                        <input type="radio" ng-model="bu" value= "HBO" />Hub One
+                    </div>
+
+  
+                    <label class="control-label" for="typeactif">Type d'actif finance</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="typeactif" id="typeactif" class="form-control" placeholder="typeactif" required>    
+                        <input type="radio" ng-model="typeactif" value="technologique" />technologique (info/reseau/telephonie)
+                        <input type="radio" ng-model="typeactif" value="industrie" />industriel
+                        <input type="radio" ng-model="typeactif" value="medical" />medical
+                        <input type="radio" ng-model="typeactif" value="immateriel" />Immateriel<br />
+                    </div>
+
+
+
+                   <label class="control-label" for="name">name*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="nom" required>
+                    </div>
+
+                    <label class="control-label" for="fieconum">numero contrat*</label>
+                    <div class="controls">
+                        <input type="number" min=1000 max=9999 data-ng-model="fieconum" id="fieconum" class="form-control" placeholder="Numero fieconum"  required>
+                    </div>
+                    
+                    <label class="control-label" for="locataire">locataire*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="locataire" id="locataire" class="form-control" placeholder="locataire" required>
+                    </div>
+
+                    <label class="control-label" for="refinanceur">refinanceur*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="refinanceur" id="refinanceur" class="form-control" placeholder="refinanceur" required>
+                        <input type="radio" ng-model="refinanceur" value="Siemens" />Siemens
+                        <input type="radio" ng-model="refinanceur" value="Ge Cap" />Ge capital
+                        <input type="radio" ng-model="refinanceur" value="Leascom" />Leascom
+                        <input type="radio" ng-model="refinanceur" value="LorEquip" />LorEquip<br />
+                    </div>
+                    <label class="control-label" for="consultant">consultant*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="consultant" id="consultant" class="form-control" placeholder="consultant" required >
+                        <input type="radio" ng-model="consultant" value= "pake" />Pake
+                        <input type="radio" ng-model="consultant" value= "mali" />Mali
+                        <input type="radio" ng-model="consultant" value= "chde" />Chde
+                    </div>
+
+                    <label class="control-label" for="partenaire">partenaire*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="partenaire" id="partenaire" class="form-control" placeholder="partenaire" required>
+                    </div>
+           
+                    <label class="control-label" for="duree">duree*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="duree" id="duree" class="form-control" placeholder="duree" required>
+                        <input type="radio" ng-model="duree" value= 24 />24
+                        <input type="radio" ng-model="duree" value= 30 />30
+                        <input type="radio" ng-model="duree" value= 36 />36
+                        <input type="radio" ng-model="duree" value= 42 />42
+                        <input type="radio" ng-model="duree" value= 48 />48
+                        <input type="radio" ng-model="duree" value= 60 />60
+                        <input type="radio" ng-model="duree" value= 72 />72
+                        <br />
+                    </div>
+
+                    <label class="control-label" for="periodicite">periodicite*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="periodicite" id="periodicite" class="form-control" placeholder="periodicite" required>
+                        <input type="radio" ng-model="periodicite" value= "mens" />Mensuel
+                        <input type="radio" ng-model="periodicite" value= "tri" />Trimestriel
+                    </div>
+
+                    <label class="control-label" for="nbperiode">nbperiode</label><div class="controls">
+                        <input type="number" data-ng-model="nbperiode" id="name" class="form-control" placeholder="nbperiode" ng-value="nbperiode" required>
+                    </div>
+
+                     <label class="control-label" for="drfaccord">drfaccord</label><div class="controls">
+                        <input type="text" data-ng-model="drfaccord" id="drfaccord" class="form-control" placeholder="Accord ?" >
+                    </div>
+                    ------------------------------------------------------------
+                    <label class="control-label" for="fcomtachat">fcomtachat</label><div class="controls">
+                        <input type="number" data-ng-model="fcomtachat" id="fcomtachat" class="form-control" placeholder="mt d'achat" required>
+                    </div>
+
+                    <label class="control-label" for="fcomtrachat">fcomtrachat</label><div class="controls">
+                        <input type="number" data-ng-model="fcomtrachat" id="fcomtrachat" class="form-control" placeholder="mt de rachat" >
+                    </div>
+                    <label class="control-label" for="fcomtafin">fcomtafin</label><div class="controls">
+                        <input type="number" data-ng-model="fcomtafin" id="fcomtafin" class="form-control" placeholder="mt brut a financer" required>
+                    </div>
+                    <label class="control-label" for="fcotxcommpart">fcotxcommpart</label><div class="controls">
+                        <input type="number" data-ng-model="fcotxcommpart" id="fcotxcommpart" class="form-control" placeholder="tx commiss part" required>
+                    </div>
+                    <label class="control-label" for="fcocommpart">fcocommpart</label><div class="controls">
+                        <input type="number" data-ng-model="fcocommpart" id="fcocommpart" class="form-control" placeholder="commiss part" required>
+                    </div>
+                    <label class="control-label" for="fcotxcommapport">fcotxcommapport</label><div class="controls">
+                        <input type="number" data-ng-model="fcotxcommapport" id="fcotxcommapport" class="form-control" placeholder="tx commiss apport" required>
+                    </div>
+                    <label class="control-label" for="fcocommapport">fcocommapport</label><div class="controls">
+                        <input type="number" data-ng-model="fcocommapport" id="fcocommapport" class="form-control" placeholder="commiss apport" required>
+                    </div>
+                    <label class="control-label" for="fcomtnfin">fcomtnfin</label><div class="controls">
+                        <input type="number" data-ng-model="fcomtnfin" id="fcomtnfin" class="form-control" placeholder="mt net a financer" required>
+                    </div>
+                    <label class="control-label" for="drfcoef">drfcoef</label><div class="controls">
+                        <input type="number" data-ng-model="drfcoef" id="drfcoef" class="form-control" placeholder="Coef refi "  required>
+                    </div>
+                    <label class="control-label" for="loyer">loyer</label><div class="controls">
+                        <input type="number" data-ng-model="loyer" id="loyer" class="form-control" placeholder="loyer" required>
+                    </div>
+                    <label class="control-label" for="fcovaleuract">fcovaleuract</label><div class="controls">
+                        <input type="number" data-ng-model="fcovaleuract" id="fcovaleuract" class="form-control" placeholder="Valeur actualisée" required>
+                    </div>                    
+                    <label class="control-label" for="drfmtcession">drfmtcession</label><div class="controls">
+                        <input type="tnumberext" data-ng-model="drfmtcession" id="drfmtcession" class="form-control" placeholder="mt cession" required>
+                    </div>
+                    <label class="control-label" for="fcomargebrute">fcomargebrute</label><div class="controls">
+                        <input type="number" data-ng-model="fcomargebrute" id="fcomargebrute" class="form-control" placeholder="Marge brute" required>
+                    </div>                    
+                    <label class="control-label" for="fcomargemad">fcomargemad</label><div class="controls">
+                        <input type="number" data-ng-model="fcomargemad" id="fcomargemad" class="form-control" placeholder="Marge MAD" required>
+                    </div>                    
+                    <label class="control-label" for="fcofrdoss">fcofrdoss</label><div class="controls">
+                        <input type="number" data-ng-model="fcofrdoss" id="fcofrdoss" class="form-control" placeholder="Marge fr doss" required>
+                    </div>                    
+  
+                    <label class="control-label" for="fcofraisfi">fcofraisfi</label><div class="controls">
+                        <input type="number" data-ng-model="fcofraisfi" id="fcofraisfi" class="form-control" placeholder="frais financiers" required>
+                    </div>
+                    <label class="control-label" for="fcomargenette">fcomargenette</label><div class="controls">
+                        <input type="number" data-ng-model="fcomargenette" id="fcomargenette" class="form-control" placeholder="Marge nette" required>
+                    </div>                    
+                   <label class="control-label" for="fcomargerev">fcomargerev</label><div class="controls">
+                        <input type="number" data-ng-model="fcomargerev" id="fcomargerev" class="form-control" placeholder="Marge revente" required>
+                    </div>                    
+                   <label class="control-label" for="fcomargeprlg">fcomargeprlg</label><div class="controls">
+                        <input type="tnumberext" data-ng-model="fcomargeprlg" id="fcomargeprlg" class="form-control" placeholder="Marge prolong" required>
+                    </div>                    
+                    <label class="control-label" for="fcomargefinale">fcomargefinale</label><div class="controls">
+                        <input type="number" data-ng-model="fcomargefinale" id="fcomargefinale" class="form-control" placeholder="SuperMarge finale" required>
+                    </div>                    
+<!--                     <label class="control-label" for="factachat.numfacture">factachat.numfacture</label><div class="controls">
+                        <input type="text" data-ng-model="factachat.numfacture" id="factachat.numfacture" class="form-control" placeholder="numero facture" required>
+                    </div>                    
+                    <label class="control-label" for="factachat.fournisseur">factachat.fournisseur</label><div class="controls">
+                        <input type="text" data-ng-model="factachat.fournisseur" id="factachat.fournisseur" class="form-control" placeholder="Fournisseur facture" required>
+                    </div>  -->                   
+
+                </div>
+                <div class="form-group">
+                    <input type="submit"  class="btn btn-default">
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>
+
+
+<!--    },
+    factachat: {
+    numfacture: { type: String, lowercase: true, trim: true },
+    fournisseur: { type: String, lowercase: true, trim: true },
+    dateemission: { type: String, lowercase: true, trim: true },
+    datexig: { type: String, lowercase: true, trim: true },
+    montantht: { type: String, lowercase: true, trim: true },
+    montantttc: { type: String, lowercase: true, trim: true }
+    }
+-->

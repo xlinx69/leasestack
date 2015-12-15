@@ -1,0 +1,223 @@
+<section data-ng-controller="ContratsController" data-ng-init="findOne()">
+   <div class="page-header">
+        <h1>Edit contrat</h1>
+        <h1>contrat#: {{contrat.ctrtnum}}</h1>
+    </div>
+    <div class="col-md-6" "well">
+
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    
+                  <label class="control-label" for="bu">BU</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.bu" id="bu" class="form-control" placeholder="bu" required >
+                        <input type="radio" ng-model="contrat.bu" value= "EVL" />Evoliance
+                        <input type="radio" ng-model="contrat.bu" value= "UBS" />Ubique systemes
+                        <input type="radio" ng-model="contrat.bu" value= "HBO" />Hub One
+                    </div>
+
+                    <label class="control-label" for="typeactif">Type d'actif finance</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.typeactif" id="typeactif" class="form-control" placeholder="typeactif" required>    
+                        <input type="radio" ng-model="contrat.typeactif" value="technologique" />technologique (info/reseau/telephonie)
+                        <input type="radio" ng-model="contrat.typeactif" value="industrie" />industriel
+                        <input type="radio" ng-model="contrat.typeactif" value="medical" />medical
+                        <input type="radio" ng-model="contrat.typeactif" value="immateriel" />Immateriel<br />
+                    </div>
+
+                    <label class="control-label" for="name">Nom</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.name" id="name" class="form-control" placeholder="Nom" required>
+                    </div>
+
+                   <label class="control-label" for="ctrtnum">ctrtnum</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="contrat.ctrtnum" id="ctrtnum" class="form-control" placeholder="Num contrat" required>
+                    </div>
+                    <label class="control-label" for="locataire">locataire</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.locataire" id="locataire" class="form-control" placeholder="locataire" required>
+                    </div>
+
+                    <label class="control-label" for="refinanceur">refinanceur</label>
+                    <div class="controls">
+                       <input type="text" data-ng-model="contrat.refinanceur" id="refinanceur" class="form-control" placeholder="refinanceur" required>
+                   
+                        <input type="radio" ng-model="contrat.refinanceur" value="Siemens" />Siemens
+                        <input type="radio" ng-model="contrat.refinanceur" value="GE Cap" />GE cap
+                        <input type="radio" ng-model="contrat.refinanceur" value="Leascom" />Leascom
+                        <input type="radio" ng-model="contrat.refinanceur" value="LorEquip" />LorEquip
+                        <br />
+                    </div>
+
+                    <label class="control-label" for="consultant">consultant</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.consultant" id="consultant" class="form-control" placeholder="consultant" required>
+                    </div>
+                    <input type="radio" ng-model="contrat.consultant" value= "pake" />Pake
+                    <input type="radio" ng-model="contrat.consultant" value= "mali" />Mali
+                    <input type="radio" ng-model="contrat.consultant" value= "chde" />Chde<br />
+
+                    <label class="control-label" for="partenaire">partenaire</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.partenaire" id="partenaire" class="form-control" placeholder="partenaire" required>
+                    </div>
+                    <label class="control-label" for="duree">duree</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.duree" id="duree" class="form-control" placeholder="duree" required>
+                        <input type="radio" ng-model="contrat.duree" value= 24 />24
+                        <input type="radio" ng-model="contrat.duree" value= 30 />30
+                        <input type="radio" ng-model="contrat.duree" value= 36 />36
+                        <input type="radio" ng-model="contrat.duree" value= 42 />42
+                        <input type="radio" ng-model="contrat.duree" value= 48 />48
+                        <input type="radio" ng-model="contrat.duree" value= 60 />60
+                        <input type="radio" ng-model="contrat.duree" value= 72 />72
+                        <br />
+                    </div>
+
+                    <label class="control-label" for="periodicite">periodicite</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.periodicite" id="periodicite" class="form-control" placeholder="periodicite" required>
+                        <input type="radio" ng-model="contrat.periodicite" value= "mens" />Mensuel
+                        <input type="radio" ng-model="contrat.periodicite" value= "tri" />Trimestriel
+                        <br />
+
+                    </div>
+                    <label class="control-label" for="nbperiode">nbperiode</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.nbperiode" id="nbperiode" class="form-control" placeholder="nbperiode" required>
+                    </div>
+                    <label class="control-label" for="loyer">loyer</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.loyer" id="loyer" class="form-control" placeholder="loyer" required>
+                    </div>
+ <!-- drf selection -->                    
+                    <label class="control-label" for="drfnum">drfnum</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="contrat.drfnum" id="drfnum" class="form-control" placeholder="Numero drf" required>
+                    </div>
+                    <select ng-model="drfnum" ng-options="drfnum as contrat.drfnum for contrat in Contrats">
+                    <option value="">Sélectionnez une drf</option>
+                    </select>
+                    <br/>
+<!-- fieco selection -->                 
+                    <label class="control-label" for="econum">econum</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="contrat.econum" id="econum" class="form-control" placeholder="Numero fieco" required>
+                    </div>
+                    <select ng-model="econum" ng-options="econum as ecomony.fieconum for economy in Economies">
+                    <option value="">Sélectionnez une Fiche Eco</option>
+                    </select>
+                    <br/>
+
+                    <label class="control-label" for="etatrefinct">etatrefinct</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.etatrefinct" id="etatrefinct" class="form-control" placeholder="etatrefinct" required>
+                        <input type="radio" ng-model="contrat.etatrefinct" value= 'non defini' />non defini
+                        <input type="radio" ng-model="contrat.etatrefinct" value= "encours" />encours
+                        <input type="radio" ng-model="contrat.etatrefinct" value= "attente pieces" />attente pieces
+                        <input type="radio" ng-model="contrat.etatrefinct" value= "accord partiel" />accord partiel
+                        <input type="radio" ng-model="contrat.etatrefinct" value= "accord conditionnel" />accord conditionnel
+                        <input type="radio" ng-model="contrat.etatrefinct" value= "accord complet"/>accord complet
+                        <input type="radio" ng-model="contrat.etatrefinct" value= "refus 1er" />refus 1er
+                        <input type="radio" ng-model="contrat.etatrefinct" value= "refus definitif" />refus definitif
+
+                        <br />
+                    </div>
+
+    
+                   <label class="control-label" for="etatcession">etatcession</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.etatcession" id="etatcession" class="form-control" placeholder="etatcession" required>
+                        <input type="radio" ng-model="contrat.etatcession" value= 'non defini' />non defini
+                        <input type="radio" ng-model="contrat.etatcession" value= 'autoporte' />autoporte
+                        <input type="radio" ng-model="contrat.etatcession" value= 'prorata' />prorata
+                        <input type="radio" ng-model="contrat.etatcession" value= 'cede' />cede
+                        <input type="radio" ng-model="contrat.etatcession" value= 'rachete' />rachete
+
+                        <br />
+                    </div>
+    
+                   <label class="control-label" for="etatdenonc">etatdenonc</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.etatdenonc" id="etatdenonc" class="form-control" placeholder="etatdenonc" required>
+                        <input type="radio" ng-model="contrat.etatdenonc" value= 'non defini' />non defini
+                        <input type="radio" ng-model="contrat.etatdenonc" value= 'denonce valide' />denonce valide
+                        <input type="radio" ng-model="contrat.etatdenonc" value= 'denonce tardive' />denonce tardive
+                        <input type="radio" ng-model="contrat.etatdenonc" value= 'non denonce' />attente denonce
+                        <input type="radio" ng-model="contrat.etatdenonc" value= 'hors delais' />delais denonce depasse
+
+                        <br />
+                    </div>
+
+
+                   <label class="control-label" for="etatvie">etatvie</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.etatvie" id="etatvie" class="form-control" placeholder="etatvie" required>
+                        <input type="radio" ng-model="contrat.etatvie" value= 'non defini' />non defini
+                        <input type="radio" ng-model="contrat.etatvie" value= 'montage' />montage
+                        <input type="radio" ng-model="contrat.etatvie" value= 'cession' />cree 
+                        <input type="radio" ng-model="contrat.etatvie" value= 'normal' />normal
+                        <input type="radio" ng-model="contrat.etatvie" value= 'evolution' />evolution
+                        <input type="radio" ng-model="contrat.etatvie" value= 'fin de contrat' />fin de contrat
+                        <input type="radio" ng-model="contrat.etatvie" value= 'prolong' />prolong
+                        <input type="radio" ng-model="contrat.etatvie" value= 'cloture' />cloture
+                        <input type="radio" ng-model="contrat.etatvie" value= 'remplace' />annu remplace
+
+                        <br />
+                    </div>
+
+                    
+                    <label class="control-label" for="ctrtdsignature">ctrtdsignature</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="contrat.ctrtdsignature" id="ctrtdsignature" class="form-control" placeholder="Date signature contrat" required>
+                    </div>
+                    <label class="control-label" for="ctrtddebut">ctrtddebut</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="contrat.ctrtddebut" id="ctrtddebut" class="form-control" placeholder="Date debut contrat" required>
+                    </div>
+                    <label class="control-label" for="ctrtdfin">ctrtdfin</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="contrat.ctrtdfin" id="ctrtdfin" class="form-control" placeholder="Date fin nominale contrat" required>
+                    </div>
+                    <label class="control-label" for="ctrtddenonc">ctrtddenonc</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="contrat.ctrtddenonc" id="ctrtddenonc" class="form-control" placeholder="Date denonc effective contrat" required>
+                    </div>
+                    <label class="control-label" for="crtrtdlim">crtrtdlim</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="contrat.crtrtdlim" id="crtrtdlim" class="form-control" placeholder="Date limite denonc contrat" required>
+                    </div>
+                    <label class="control-label" for="ctrtdcloture">ctrtdcloture</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="contrat.ctrtdcloture" id="ctrtdcloture" class="form-control" placeholder="Date cloture contrat" required>
+                    </div>
+                    <label class="control-label" for="ctrtdcession">ctrtdcession</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="contrat.ctrtdcession" id="ctrtdcession" class="form-control" placeholder="Date cession contrat" required>
+                    </div>
+
+                    <label class="control-label" for="modifier">modifier</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="contrat.modifier" id="contrat.modifier" class="form-control" placeholder="modifier">
+                    </div>
+
+                    <label class="control-label" for="ctrtcommentaire">commentaire</label>
+                    <div class="controls">
+                        <textarea name="ctrtcommentaire" data-ng-model="contrat.ctrtcommentaire" id="ctrtcommentaire" class="form-control" cols="30" rows="10" placeholder="Commentaire"></textarea>
+                    </div>
+                </div> 
+
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+
+            </fieldset>
+        </form>
+    </div>
+</section>

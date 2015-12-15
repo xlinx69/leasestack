@@ -1,0 +1,289 @@
+<section data-ng-controller="SocietesController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit Societe</h1>
+    </div>
+
+   <div class="col-md-6">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+
+                <div class="form-group well">
+                    
+                    <label class="control-label" for="stenom">Raison sociale*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.stenom" id="societe.stenom" class="form-control"  placeholder="stenom" value="stenom" required >
+                    </div>
+
+                    <label class="control-label" for="stegrp">groupe</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.stegrp" id="stegrp" class="form-control"  placeholder="stegrp" value="stegrp"  >
+                    </div>
+
+                    <label class="control-label" for="siren">siren*</label>
+                    <div class="controls">
+                        <input type="number" min=99999999 max=999999999 data-ng-model="societe.siren" id="siren" class="form-control" placeholder="Numero siren" value=987654321 required>
+                    </div>
+                    
+
+                    <label class="control-label" for="steformsoc">forme sociale*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.steformsoc" id="steformsoc" class="form-control" placeholder="steformsoc" required>
+                        <input type="radio" ng-model="societe.steformsoc" value="SARL" />SARL
+                        <input type="radio" ng-model="societe.steformsoc" value="SA" />SA
+                        <input type="radio" ng-model="societe.steformsoc" value="SAS" />SAS
+                        <input type="radio" ng-model="societe.steformsoc" value="SNC" />SNC
+                        <input type="radio" ng-model="societe.steformsoc" value="EI" />EI
+                        <input type="radio" ng-model="societe.steformsoc" value="EURL" />EURL
+                        <input type="radio" ng-model="societe.steformsoc" value="SASU" />SASU
+                        <input type="radio" ng-model="societe.steformsoc" value="SCP" />SCP
+                        <input type="radio" ng-model="societe.steformsoc" value="SELARL" />SELARL
+                        <input type="radio" ng-model="societe.steformsoc" value="SELAS" />SELAS
+                    </div>
+
+                    <label class="control-label" for="stedcreat">date creation</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="societe.stedcreat" id="stedcreat" class="form-control" placeholder="Date creation" >
+                    </div>
+
+                    <label class="control-label" for="capsoc">capital social</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.capsoc" id="capsoc" class="form-control" placeholder="capsoc" >
+                    </div>
+
+                    <label class="control-label" for="stedcloture">date cloture bilan</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="societe.stedcloture" id="stedcloture" class="form-control" placeholder="Date cloture exercice" >
+                    </div>
+
+                    <label class="control-label" for="ca">dernier chiffre affaire</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.ca" id="ca" class="form-control" placeholder="dernier ca" >
+                    </div>
+
+                    <label class="control-label" for="can">avant dernier chiffre affaire</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.can" id="can" class="form-control" placeholder="avant dernier ca" >
+                    </div>
+
+                    <label class="control-label" for="rn">dernier resultat net</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.rn" id="rn" class="form-control" placeholder="dernier rn" >
+                    </div>
+
+                    <label class="control-label" for="rnn">avant dernier resultat net</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.rnn" id="rnn" class="form-control" placeholder="avant dernier rn" >
+                    </div>
+
+                    <label class="control-label" for="banquepal">banque principale</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.banquepal" id="banquepal" class="form-control" placeholder="banquepal" >
+                        <input type="radio" ng-model="societe.banquepal" value= "bnp" />BNP
+                        <input type="radio" ng-model="societe.banquepal" value= "ca" />CA
+                        <input type="radio" ng-model="societe.banquepal" value= "bpce" />BPCE
+                        <input type="radio" ng-model="societe.banquepal" value= "sg" />SG
+                        <input type="radio" ng-model="societe.banquepal" value= "bp" />BP-CCP
+                        <input type="radio" ng-model="societe.banquepal" value= "cm" />CM-CIC
+                        <input type="radio" ng-model="societe.banquepal" value= "ing" />ING
+                        <input type="radio" ng-model="societe.banquepal" value= "hsbc" />HSBC
+                        <input type="radio" ng-model="societe.banquepal" value= "brcl" />BARKLAYS
+                        <input type="radio" ng-model="societe.banquepal" value= "intesa" />INTESA-SP
+                        <input type="radio" ng-model="societe.banquepal" value= "abn" />ABN
+                        <input type="radio" ng-model="societe.banquepal" value= "ubs" />UBS
+                    </div>
+                    <label class="control-label" for="banquesec">banque secondaire</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.banquesec" id="banquesec" class="form-control" placeholder="banquesec" >
+                        <input type="radio" ng-model="societe.banquesec" value= "bnp" />BNP
+                        <input type="radio" ng-model="societe.banquesec" value= "ca" />CA
+                        <input type="radio" ng-model="societe.banquesec" value= "bpce" />BPCE
+                        <input type="radio" ng-model="societe.banquesec" value= "sg" />SG
+                        <input type="radio" ng-model="societe.banquesec" value= "bp" />BP-CCP
+                        <input type="radio" ng-model="societe.banquesec" value= "cm" />CM-CIC
+                        <input type="radio" ng-model="societe.banquesec" value= "ing" />ING
+                        <input type="radio" ng-model="societe.banquesec" value= "hsbc" />HSBC
+                        <input type="radio" ng-model="societe.banquesec" value= "brcl" />BARKLAYS
+                        <input type="radio" ng-model="societe.banquesec" value= "intesa" />INTESA-SP
+                        <input type="radio" ng-model="societe.banquesec" value= "abn" />ABN
+                        <input type="radio" ng-model="societe.banquesec" value= "ubs" />UBS
+                    </div>
+
+                    <label class="control-label" for="stetype">relation vs evoliance*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.stetype" id="stetype" class="form-control" placeholder="stetype" required>
+                        <input type="radio" ng-model="societe.stetype" value= "prospect" />prospect
+                        <input type="radio" ng-model="societe.stetype" value= "locataire" />locataire
+                        <input type="radio" ng-model="societe.stetype" value= "refinanceur" />refinanceur
+                         <input type="radio" ng-model="societe.stetype" value= "courtier" />courtier
+                         <input type="radio" ng-model="societe.stetype" value= "captive" />captive
+                         <input type="radio" ng-model="societe.stetype" value= "partenaire" />partenaire
+                        <input type="radio" ng-model="societe.stetype" value= "fournisseur" />fournisseur
+                    </div>
+
+                    <label class="control-label" for="steadresse1">adresse1</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.steadresse1" id="steadresse1" class="form-control" placeholder="steadresse1" >
+                    </div>
+           
+                    <label class="control-label" for="steadresse2">adresse2</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.steadresse2" id="steadresse2" class="form-control" placeholder="steadresse2" >
+                    </div>
+           
+                    <label class="control-label" for="stecp">cp</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="societe.stecp" min=9999 max=99999 id="stecp" class="form-control" placeholder="stecp" >
+                    </div>
+           
+                    <label class="control-label" for="steville">ville</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.steville" id="steville" class="form-control" placeholder="ville" >
+                    </div>
+           
+                   <label class="control-label" for="stetel">telephone gal</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.stetel" id="stetel" class="form-control" placeholder="stetel" >
+                    </div>
+                  <label class="control-label" for="stefax">fax gal</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.stefax" id="stefax" class="form-control" placeholder="stefax" >
+                    </div>
+                  <label class="control-label" for="stemail">mail gal</label>
+                    <div class="controls">
+                        <input type="mail" data-ng-model="societe.stemail" id="stemail" class="form-control" placeholder="stemail" >
+                    </div>
+
+                  <label class="control-label" for="mandname">nom mandataire social</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.mandname" id="mandname" class="form-control" placeholder="mandname" >
+                    </div>
+                                            
+                   <label class="control-label" for="mandfonc">mandfonc</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.mandfonc" id="mandfonc" class="form-control" placeholder="consultant"  >
+                        <input type="radio" ng-model="societe.mandfonc" value= "pdg" />PDG
+                        <input type="radio" ng-model="societe.mandfonc" value= "gerant" />GERANT
+                        <input type="radio" ng-model="societe.mandfonc" value= "dg" />DG
+                        <input type="radio" ng-model="societe.mandfonc" value= "daf" />DAF
+                        <input type="radio" ng-model="societe.mandfonc" value= "pouvoir" />POUVOIR
+                    </div>
+
+                  <label class="control-label" for="dgname">nom directeur general</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.dgname" id="dgname" class="form-control" placeholder="dgname" >
+                    </div>
+
+                  <label class="control-label" for="finname">nom directeur financier</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.finname" id="finname" class="form-control" placeholder="finname" >
+                    </div>
+
+                  <label class="control-label" for="compname">nom directeur comptable</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.compname" id="compname" class="form-control" placeholder="compname" >
+                    </div>
+
+                  <label class="control-label" for="techname">nom directeur technique</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.techname" id="techname" class="form-control" placeholder="techname" >
+                    </div>
+
+                  <label class="control-label" for="assname">nom assistante</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.assname" id="assname" class="form-control" placeholder="assname" >
+                    </div>
+
+                    <label class="control-label" for="consultant">consultant*</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.consultant" id="consultant" class="form-control" placeholder="consultant" required >
+                        <input type="radio" ng-model="societe.consultant" value= "pake" />Pake
+                        <input type="radio" ng-model="societe.consultant" value= "mali" />Mali
+                        <input type="radio" ng-model="societe.consultant" value= "chde" />Chde
+                    </div>
+
+                    <label class="control-label" for="partenaire">partenaire</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.partenaire" id="partenaire" class="form-control" placeholder="partenaire" >
+                    </div>
+
+                   <label class="control-label" for="etatbdf">etatbdf</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.etatbdf" id="etatbdf" class="form-control" placeholder="etatbdf" >
+                        <input type="radio" ng-model="societe.etatbdf" value= 'inconnu' />inconnu
+                        <input type="radio" ng-model="societe.etatbdf" value= "excellente" />3++
+                        <input type="radio" ng-model="societe.etatbdf" value= "tres forte" />3+
+                        <input type="radio" ng-model="societe.etatbdf" value= "forte" />3
+                        <input type="radio" ng-model="societe.etatbdf" value= 'assez forte' />4+
+                        <input type="radio" ng-model="societe.etatbdf" value= "correcte" />4
+                        <input type="radio" ng-model="societe.etatbdf" value= "assez faible" />5+
+                        <input type="radio" ng-model="societe.etatbdf" value= "faible" />5
+                         <input type="radio" ng-model="societe.etatbdf" value= "tres faible"/>6
+                        <input type="radio" ng-model="societe.etatbdf" value= "incident" />7
+                        <input type="radio" ng-model="societe.etatbdf" value= "menace" />8
+                        <input type="radio" ng-model="societe.etatbdf" value= "compromise" />9
+                        <input type="radio" ng-model="societe.etatbdf" value= "procedure" />P
+                        <input type="radio" ng-model="societe.etatbdf" value= "aucune info" />0
+                        <br />
+                    </div>
+    
+                   <label class="control-label" for="etatpc">etat proc coll</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.etatpc" id="etatpc" class="form-control" placeholder="etatpc" >
+                        <input type="radio" ng-model="societe.etatpc" value= 'inconnu' />inconnu 
+                        <input type="radio" ng-model="societe.etatpc" value= 'aucune' />aucune 
+                        <input type="radio" ng-model="societe.etatpc" value= 'sauvegarde' />sauvegarde 
+                        <input type="radio" ng-model="societe.etatpc" value= 'redressement' />redressement
+                        <input type="radio" ng-model="societe.etatpc" value= 'liquidation' />liquidation
+                        <br />
+                    </div>
+    
+    
+                   <label class="control-label" for="etatfi">etatfi</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.etatfi" id="etatfi" class="form-control" placeholder="etatfi" >
+                        <input type="radio" ng-model="societe.etatfi" value= 'excellant' />excellente
+                        <input type="radio" ng-model="societe.etatfi" value= 'bon' />bon
+                        <input type="radio" ng-model="societe.etatfi" value= 'passable' />passable
+                        <input type="radio" ng-model="societe.etatfi" value= 'faible' />faible
+                        <input type="radio" ng-model="societe.etatfi" value= 'mauvais' />mauvais
+                        <input type="radio" ng-model="societe.etatfi" value= 'tres mauvais' />très mauvais
+                        <br />
+                    </div>
+
+    
+                   <label class="control-label" for="incident">Incident</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="societe.incident" id="incident" class="form-control" placeholder="incident" >
+                        <input type="radio" ng-model="societe.incident" value= 'aucun' />aucun
+                        <input type="radio" ng-model="societe.incident" value= 'fournisseur' />incident reglt fournisseur
+                        <input type="radio" ng-model="societe.incident" value= 'refinanceur' />incident reglt refinanceur
+                        <input type="radio" ng-model="societe.incident" value= 'evoliance' />incident reglt Evoliance
+                        <br />
+                    </div>
+
+
+
+
+                    <label class="control-label" for="stecommentaire">commentaire</label>
+                    <div class="controls">
+                        <textarea name="societe.stecommentaire" data-ng-model="societe.stecommentaire" id="stecommentaire" class="form-control" cols="30" rows="10" placeholder="Commentaire"></textarea>
+                    </div>
+
+
+
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+
+
+
+</section>

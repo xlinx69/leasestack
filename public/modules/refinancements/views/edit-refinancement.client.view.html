@@ -1,0 +1,170 @@
+<section data-ng-controller="RefinancementsController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit Refinancement</h1>
+    </div>
+    <div class="col-md-6" "well">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <div class="form-group" "well">
+                   
+                      <label class="control-label" for="bu">BU</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="refinancement.bu" id="bu" class="form-control" placeholder="bu" required >
+                            <input type="radio" ng-model="refinancement.bu" value= "EVL" />Evoliance
+                            <input type="radio" ng-model="refinancement.bu" value= "UBS" />Ubique systemes
+                            <input type="radio" ng-model="refinancement.bu" value= "HBO" />Hub One
+                        </div>
+
+
+                       <label class="control-label" for="name">Nom</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="refinancement.name" id="name" class="form-control" placeholder="Nom">
+                        </div>
+
+  
+                    <label class="control-label" for="typeactif">Type d'actif finance</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="refinancement.typeactif" id="typeactif" class="form-control" placeholder="typeactif" required>    
+                        <input type="radio" ng-model="refinancement.typeactif" value="technologique" />technologique (info/reseau/telephonie)
+                        <input type="radio" ng-model="refinancement.typeactif" value="industrie" />industriel
+                        <input type="radio" ng-model="refinancement.typeactif" value="medical" />medical
+                        <input type="radio" ng-model="refinancement.typeactif" value="immateriel" />Immateriel<br />
+                    </div>
+
+<!-- begin insert chde -->   
+                    <label class="control-label" for="drfnum">drfnum</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="refinancement.drfnum" id="drfnum" class="form-control" placeholder="Numero drf" required>
+                    </div>
+
+                    <label class="control-label" for="ctrtnum">ctrtnum</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="refinancement.ctrtnum" id="ctrtnum" class="form-control" placeholder="Numero contrat" required>
+                    </div>
+                    <select ng-model="refinancement.ctrtnum" ng-options="refinancement.ctrtnum as contrat.ctrtnum for contrat in Contrats | orderBy:'ctrtdsignature'">
+                    <option value="">Sélectionnez un contrat</option>
+                   </select>
+                <br/>
+
+                    <label class="control-label" for="econum">econum</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="refinancement.econum" id="econum" class="form-control" placeholder="Numero fieco" required>
+                    </div>
+                    <select ng-model="refinancement.econum" ng-options="refinancement.econum as contrat.econum for contrat in Contrats | orderBy:'ctrtdsignature'">
+                    <option value="">Sélectionnez une fieco</option>
+                    </select>
+                <br/>      
+
+                   <label class="control-label" for="locataire">locataire</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="refinancement.locataire" id="name" class="form-control" placeholder="locataire" required>
+                    </div>
+
+                    <label class="control-label" for="refinanceur">refinanceur</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="refinancement.refinanceur" id="name" class="form-control" placeholder="refinanceur" required>
+                        <input type="radio" ng-model="refinancement.refinanceur" value="Siemens" />Siemens
+                        <input type="radio" ng-model="refinancement.refinanceur" value="GE Cap" />GE cap
+                        <input type="radio" ng-model="refinancement.refinanceur" value="Leascom" />Leascom
+                        <input type="radio" ng-model="refinancement.refinanceur" value="LorEquip" />LorEquip
+                        <br/>
+                    </div>
+                    <label class="control-label" for="consultant">consultant</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="refinancement.consultant" id="name" class="form-control" placeholder="consultant" required >
+                        <input type="radio" ng-model="refinancement.consultant" value= "pake" />Pake
+                        <input type="radio" ng-model="refinancement.consultant" value= "mali" />Mali
+                        <input type="radio" ng-model="refinancement.consultant" value= "chde" />Chde
+                        <br/>
+                    </div>
+
+                    <label class="control-label" for="partenaire">partenaire</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="refinancement.partenaire" id="partenaire" class="form-control" placeholder="partenaire" required>
+                    </div>
+
+                    <label class="control-label" for="duree">duree</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="refinancement.duree" id="duree" class="form-control" placeholder="duree" required>
+                        <input type="radio" ng-model="refinancement.duree" value= 24 />24
+                        <input type="radio" ng-model="refinancement.duree" value= 30 />30
+                        <input type="radio" ng-model="refinancement.duree" value= 36 />36
+                        <input type="radio" ng-model="refinancement.duree" value= 42 />42
+                        <input type="radio" ng-model="refinancement.duree" value= 48 />48
+                        <input type="radio" ng-model="refinancement.duree" value= 60 />60
+                        <input type="radio" ng-model="refinancement.duree" value= 72 />72
+                        <br/>
+                    </div>
+
+                    <label class="control-label" for="periodicite">periodicite</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="refinancement.periodicite" id="periodicite" class="form-control" placeholder="periodicite" required>
+                        <input type="radio" ng-model="refinancement.periodicite" value= "mens" />Mensuel
+                        <input type="radio" ng-model="refinancement.periodicite" value= "tri" />Trimestriel
+                        <br/>
+                    </div>
+
+                    <label class="control-label" for="nbperiode">nbperiode</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="refinancement.nbperiode" id="nbperiode" class="form-control" placeholder="nbperiode" required>
+                    </div>
+
+                    <label class="control-label" for="loyer">loyer</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="refinancement.loyer" id="loyer" class="form-control" placeholder="loyer" required>
+                    </div>
+ 
+                     <label class="control-label" for="drfmntafin">mntafindrf</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="refinancement.drfmntafin" id="mntafin" class="form-control" placeholder="montant a financer" required>
+                    </div>
+
+                     <label class="control-label" for="drfmtcession">drfmtcession</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="refinancement.drfmtcession" id="drfmtcession" class="form-control" placeholder="mt cession refi" required>
+                    </div>
+                     <label class="control-label" for="drfcoef">coefrefi</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="refinancement.drfcoef" id="drfcoef" class="form-control" placeholder="coeficient refi" required>
+                    </div>
+                     <label class="control-label" for="drfaccord">drfaccord</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="refinancement.drfaccord" id="drfaccord" class="form-control" placeholder="accord refi" >
+
+                        <input type="radio" ng-model="refinancement.drfaccord" value= "non envoyée" />non envoyée
+                        <input type="radio" ng-model="refinancement.drfaccord" value= "envoyée" />envoyée
+                        <input type="radio" ng-model="refinancement.drfaccord" value= "demande pieces" />demande de pieces 
+                        <input type="radio" ng-model="refinancement.drfaccord" value= "attente" />completée refi
+                        <input type="radio" ng-model="refinancement.drfaccord" value= "accord" />accord complet 
+                        <input type="radio" ng-model="refinancement.drfaccord" value= "attente" />accord partiel 
+                        <input type="radio" ng-model="refinancement.drfaccord" value= "accord partiel" />accord garanties 
+                        <input type="radio" ng-model="refinancement.drfaccord" value= "refus RSK" />refus risque
+                        <input type="radio" ng-model="refinancement.drfaccord" value= "refus EC" />refus encours
+                        <input type="radio" ng-model="refinancement.drfaccord" value= "refus" />refus
+                        <br />
+
+                    </div>
+                     <label class="control-label" for="drfdatedemande">datedemandedrf</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="refinancement.drfdatedemande" id="drfdatedemande" class="form-control" placeholder="date demande refi" >
+                    </div>
+                     <label class="control-label" for="drfdateaccord">dateaccorddrf</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="refinancement.drfdateaccord" id="drfdateaccord" class="form-control" placeholder="date accord refi" >
+                    </div>
+                    
+
+<!-- end insert chde -->                    
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>

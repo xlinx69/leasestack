@@ -1,0 +1,212 @@
+<section data-ng-controller="HomeController">
+	<div class="jumbotron text-center">
+
+
+		<div class="row">
+			<p class="lead">
+				LEASEBOARD Open-Source Full-Stack EVOLIANCE Framework Solution
+			    <img src="/modules/core/img/brand/logo.png" alt="logo application leaseboard" />
+			</p>
+		</div>
+		<div class="row">
+			<p>
+				<a class="btn btn-primary btn-small" href="http://www.evoliance.com" target="_blank">Evoliance.com</a>
+			</p>
+		</div>
+	</div>
+
+
+
+
+<div class="col-md-12 well">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Alertes</strong></h3>
+ 	</div>
+<div class="panel-body">
+
+<div class="col-md-6">
+  <div class="panel panel-danger">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Alertes Contrats</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      		<li class="list-group-item">Contrat denoncés: <span class="pull-right" data-ng-bind="contrat.consultant"></span></li>
+ 	     	<li class="list-group-item">Contrat fin -1mois <span class="pull-right" data-ng-bind="contrat.locataire"></span></li>
+      		<li class="list-group-item">Contrat prolong <span class="pull-right" data-ng-bind="contrat.partenaire"></span></li>
+      		<li class="list-group-item">Refinanceur: <span class="pull-right" data-ng-bind="contrat.refinanceur"></span></li>
+    	</ul>	
+	</div> 
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Allez Contrats</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>  
+  </div>
+</div>
+
+<div class="col-md-6">
+  <div class="panel panel-danger">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Alertes Refinancement</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">Nouvel accord : <span class="pull-right" data-ng-bind="contrat.loyer | currency :' €' "></span></li>
+      <li class="list-group-item">Nouveau refus : <span class="pull-right" data-ng-bind="contrat.periodicite"></span>
+      <li class="list-group-item">Demandes de pieces: <span class="pull-right" data-ng-bind="contrat.nbperiode"></span>
+      <li class="list-group-item">Attente + 15j : <span class="pull-right" data-ng-bind="contrat.duree"></span>
+    </ul>
+	</div>  
+
+  	<div class="panel-footer clearfix">
+        <div class="pull-right"> 
+            <a href="#" class="btn btn-primary btn-xs">Aller Refinancement</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+   </div>  
+</div>
+		
+
+<div class="col-md-6">
+ <div class="panel panel-danger">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Alertes Reglements</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">Echéance non reglés: <span class="pull-right" data-ng-bind="contrat.etatrefinct" ></span></li>
+     <li class="list-group-item">Facture dossier non réglée: <span class="pull-right" data-ng-bind="contrat.etatcession" ></span></li>
+     <li class="list-group-item">Facture prorata non réglée: <span class="pull-right" data-ng-bind="contrat.etatdenonc" ></span></li>
+     <li class="list-group-item">Facture refi non réglée: <span class="pull-right" data-ng-bind="contrat.etatvie" ></span></li>
+
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Aller Reglements</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-6">
+ <div class="panel panel-danger">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Autres alertes</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">Date signature: <span class="pull-right" data-ng-bind="contrat.ctrtdsignature | date:'shortDate' " ></span></li>
+      <li class="list-group-item">Date cession: <span class="pull-right" data-ng-bind="contrat.ctrtdcession | date:'shortDate' " ></span></li>
+      <li class="list-group-item">Date pv: <span class="pull-right" data-ng-bind="contrat.ctrtddebut | date:'shortDate' " ></span></li>
+      <li class="list-group-item">Date fin: <span class="pull-right" data-ng-bind="contrat.ctrtdfin | date:'shortDate' " ></span></li>
+      <li class="list-group-item">Date cloture: <span class="pull-right" data-ng-bind="contrat.ctrtdcloture | date:'shortDate' " ></span></li>
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Aller Contrat</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+</div>
+<!-- end panel body gal -->
+</div>
+<!-- end panel primary -->
+</div>    
+<!-- end md12 -->
+
+<br/>	
+
+	<div class="well">	
+		<div class="row">
+			<div class="col-md-6">
+				<h2>
+					<strong>A</strong>lertes contrats
+				</h2>
+		<p>
+		fin contrat -15jrs :
+		<ul>
+		<li><a target="_blank" href="/#!/contrats">ctrt0</a></li>
+		<li><a target="_blank" href="/#!/contrats">ctrt1</a></li>
+		<li><a target="_blank" href="/#!/contrats">ctrt2</a></li>
+		<li><a target="_blank" href="/#!/contrats">ctrt3</a></li>
+		</ul>
+		Limite denonc dépassée :
+		<ul>
+		<li><a target="_blank" href="/#!/contrats">ctrt4</a></li>
+		<li><a target="_blank" href="/#!/contrats">ctrt5</a></li>
+		</p>			
+		</div>
+			<div class="col-md-6">
+				<h2>
+					<strong>A</strong>lertes refis
+				</h2>
+						<p>
+		limite validité -7jrs:
+		<ul>
+		<li><a target="_blank" href="/#!/refinancements">drf0</a></li>
+		<li><a target="_blank" href="/#!/refinancements">drf1</a></li>
+		</ul>
+		</p>			
+			</div>			
+		</div>
+	</div>	
+	<div class="well">	
+			<div class="row">
+			<div class="col-md-6">
+				<h2>
+					<strong>A</strong>lerte reglements
+				</h2>
+		<p>
+		rejet reglement 1 loyer:
+		<ul>
+		<li><a target="_blank" href="/#!/reglements">rglt0</a></li>
+		<li><a target="_blank" href="/#!/reglements">rglt1</a></li>
+		</ul>
+		rejet reglement 2 loyer:
+		<ul>
+		<li><a target="_blank" href="/#!/reglements">rglt2</a></li>
+		</ul>
+		</p>			
+		rejet reglement 3 loyer:
+		<ul>
+		</ul>
+		</p>			
+		rejet reglement +3 loyer:
+		<ul>
+		<li><a target="_blank" href="/#!/reglements">rglt3</a></li>
+		</ul>
+		</p>			
+
+			</div>
+
+			<div class="col-md-6">
+				<h2>
+					<strong>A</strong>utres alertes
+				</h2>
+			</div>
+		</div>	
+	</div>		
+
+
+
+	<div class="well">
+	<br>Enjoy &amp; Keep Us Updated,
+	<br>The consultium.io  Team.
+	</div>
+
+
+</section>
+
+

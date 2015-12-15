@@ -1,0 +1,130 @@
+<section data-ng-controller="ContratsController" data-ng-init="findOne()">
+<div class="page-header">
+	<h1 data-ng-bind="contrat.ctrtnum"></h1>
+	<small>
+		<em class="text-muted">
+			Crée le
+			<span data-ng-bind="contrat.created | date:'mediumDate'"></span>
+			par
+			<span data-ng-bind="contrat.user.displayName"></span>
+		</em>
+		<em class="text-muted">
+			Modifié le
+			<span data-ng-bind="contrat.modified | date:'mediumDate'"></span>
+			par
+			<span data-ng-bind="contrat.modifier.displayName"></span>
+		</em>
+	</small>
+	<br/>
+</div>
+
+<div class= "well">
+<div class="row" border:"4px" >
+  <div class="col-md-12"><strong>contrat</strong>
+  	<h1 data-ng-bind="contrat.ctrtnum"></h1>
+	<div class="row">
+	  <div class="col-md-8"><strong>Generalites</strong>
+		<div class="row">
+		  <div class="col-md-4"><strong>Acteurs</strong>
+ 
+
+  <div class="col-lg-4">
+    <ul class="list-group">
+      <li class="list-group-item">Consultant: <span data-ng-bind="contrat.consultant"></span></li>
+      <li class="list-group-item">Locataire: <span data-ng-bind="contrat.locataire"></span></li>
+      <li class="list-group-item">Partenaire: <span data-ng-bind="contrat.partenaire"></span></li>
+      <li class="list-group-item">Refinanceur: <span data-ng-bind="contrat.refi"></span></li>
+    </ul>
+  </div>
+
+  			<span data-ng-bind="contrat.consultant"></span>
+			<span data-ng-bind="contrat.locataire"></span>
+			<span data-ng-bind="contrat.partenaire"></span>
+			<span data-ng-bind="contrat.refi"></span>
+		  </div>
+		  <div class="col-md-6 col-md-offset-2"><strong>Contrat</strong>
+			<span data-ng-bind="contrat.loyer | currency :' '€ "></span>
+			<span data-ng-bind="contrat.periodicite"></span>
+			<span data-ng-bind="contrat.nbperiode"></span>
+			<span data-ng-bind="contrat.duree"></span>
+		  </div>
+		</div>			
+		<!-- end row-->
+		<div class="row">
+		  <div class="col-md-3 col-md-offset-1"><strong>dates1 </strong>
+				<span data-ng-bind="contrat.ctrtdcession | date:'shortDate' " ></span>
+  		  </div>
+		  <div class="col-md-5 col-md-offset-1"><strong>dates2</strong>
+				<span data-ng-bind="contrat.ctrtdlimetatcession | date:'shortDate'"></span>
+		  </div>
+		</div>
+		<!-- end row-->
+	  </div>
+	  <!-- end md8 -->
+	</div>
+	
+  </div>
+  <!-- end md12 -->
+	<div class="col-md-4"><strong>statuts</strong>
+			<span data-ng-bind="contrat.etatrefinct"></span>
+			<span data-ng-bind="contrat.etatcession"></span>
+			<span data-ng-bind="contrat.etatdenonc"></span>
+			<span data-ng-bind="contrat.etatvie"></span>	
+	</div>
+</div>
+</div>    
+<br/>
+
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == contrat.user._id))">
+		<a class="btn btn-primary" href="/#!/contrats/{{contrat._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<div class="pull-left" data-ng-show="((authentication.user) && (authentication.user._id == contrat.user._id))">
+		<a class="btn btn-primary" href="/#!/contrats/{{contrat._id}}/run">
+			<i class="glyphicon glyphicon-play"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="facturerefi({{contrat._id}});">
+			<i class="glyphicon glyphicon-pause"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="factureprorata({{contrat._id}});">
+			<i class="glyphicon glyphicon-stop"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="facturedossier({{contrat._id}});">
+			<i class="glyphicon glyphicon-ban-circle"></i>
+		</a>
+	</div>
+
+<!-- Split button -->
+<br/>
+<div class="btn-group">
+  <button type="button" class="btn btn-primary">contractualisation</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Mettre en production</a></li>
+    <li><a href="#">Lancer renouvellement</a></li>
+    <li><a href="#">Lancer prolongation</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Lancer cloture</a></li>
+  </ul>
+</div>
+<div class="btn-group">
+  <button type="button" class="btn btn-warning">Facturation</button>
+  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Lancer facture cession</a></li>
+    <li><a href="#">Lancer facture prorata</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Lancer facture frais dossier</a></li>
+  </ul>
+</div
+</section>

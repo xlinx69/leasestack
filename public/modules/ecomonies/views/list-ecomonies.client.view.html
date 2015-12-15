@@ -1,0 +1,17 @@
+<section data-ng-controller="EcomoniesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Ecomonies</h1>
+    </div>
+    <div class="list-group well">
+     <div>
+        <div id="ecogrid2" ui-grid="gridOptions" class="grid" ui-grid-selection ui-grid-exporter></div>
+    </div>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!ecomonies.$resolved || ecomonies.length">
+    	Aucun Ecomonies n'existe,  creez en un ... <a href="/#!/ecomonies/create"> OK </a>?
+    </div>
+</section>
+
+
+
+

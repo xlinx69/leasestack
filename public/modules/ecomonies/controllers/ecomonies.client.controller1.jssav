@@ -1,0 +1,421 @@
+'use strict';
+
+// Ecomonies controller
+angular.module('ecomonies')
+.controller('EcomoniesController',
+['$scope', '$stateParams', '$location', 'Authentication', 'Contrats', 'Refinancements', 'Ecomonies',
+    function ($scope, $stateParams, $location, Authentication, Contrats, Refinancements, Ecomonies)
+    {$scope.authentication = Authentication;
+// rajout calcul fieco 
+    $scope.doEvalFico = function ($scope) 
+    {
+        $scope.mbf = $scope.ma + $scope.mr;
+        $scope.cp = $scope.tp / 100 * $scope.mbf;
+        $scope.ca = $scope.ta / 100 * $scope.mbf;
+        $scope.mnf = $scope.ca + $scope.cp + $scope.mbf;
+        $scope.ff = ($scope.tf / 100) * $scope.af * ($scope.nf / 365);
+        if ($scope.pr === 'tri') {
+            $scope.np = $scope.dr / 3;
+        } else {
+            $scope.np = $scope.dr;
+        }
+        $scope.cri = (1 + $scope.tm / 100) * (100 / $scope.np);
+        $scope.crb = (1 + $scope.tm / 100) * (100 / $scope.np);
+        $scope.ly = $scope.mnf * $scope.crb / 100;
+        $scope.va = $scope.ly * $scope.np;
+        $scope.mc = $scope.va;
+        $scope.mb = $scope.mc - $scope.mnf;
+        $scope.mm = $scope.ly * $scope.jp / (365 / 4);
+        $scope.mn = $scope.mb - $scope.ff + $scope.fd + $scope.mm;
+        $scope.mo = $scope.mbf * $scope.tr / 100;
+        $scope.mp = $scope.ly * 4;
+        $scope.mf = $scope.mp - $scope.mo + $scope.mn;
+        $scope.tmr = -100 * ($scope.mb / $scope.mbf)-1;
+        $scope.tmn = 100 * (1 - $scope.mn) / $scope.mnf;
+        $scope.tmf = 100 * (1 - $scope.mf) / $scope.mnf;
+    };
+
+    $scope.doTrsfrFico = function ($scope) 
+    {
+		// Implement values
+		ecomony.name= $scope.name;
+		ecomony.bu= $scope.bu;
+		ecomony.fieconum= $scope.fieconum;
+		ecomony.locataire= $scope.locataire;
+		ecomony.refinanceur= $scope.refinanceur;
+		ecomony.consultant= $scope.consultant ;
+		ecomony.partenaire= $scope.partenaire;
+
+		ecomony.drfcoef= $scope.crb;
+		ecomony.loyer= $scope.ly;
+		ecomony.drfaccord= $scope.drfaccord;
+		ecomony.duree= $scope.dr;
+		ecomony.periodicite= $scope.pr;
+		ecomony.nbperiode= $scope.np;
+		ecomony.fcomtachat= $scope.ma;
+		ecomony.fcomtrachat= $scope.mr;
+		ecomony.fcomtafin= $scope.mbf;
+		ecomony.fcotxcommpart= $scope.tp;
+		ecomony.fcocommpart= $scope.cp;
+		ecomony.fcotxcommapport= $scope.ta;
+		ecomony.fcocommapport= $scope.ca;
+		ecomony.fcomtnfin= $scope.mnf;
+		ecomony.fcovaleuract= $scope.va;
+		ecomony.drfmtcession= $scope.mc;
+		ecomony.fcomargebrute= $scope.mb;
+		ecomony.fcomargemad= $scope.mc;
+		ecomony.fcofrdoss= $scope.fd;
+		ecomony.fcofraisfi= $scope.ff;
+		ecomony.fcomargenette= $scope.mn;
+		ecomony.fcotxmargenette= $scope.tmn;
+		ecomony.fcomargerev= $scope.mo;
+		ecomony.fcomargeprlg= $scope.mp;
+		ecomony.fcomargefinale= $scope.mf;
+		ecomony.fcocommentaire=$scope.fcocommentaire;
+		ecomony.seletedfco=$scope.selectedfco;
+		ecomony.modified= Date.now();
+		ecomony.modifier= $scope.authentication.username;
+// fin rajout calcul fieco
+
+
+////////////////////////////////////////////////////////////////
+    $scope.buffeco = {
+        ma : this.fcomtachat,
+         mr : this.fcomtrachat,
+        mbf: this.fcomtafin,
+         tp : this.fcotxcommpart,
+         cp : this.fcomtcommpart,
+         ta : this.fcotxcommapport,
+        ca : this.fcomtcommapport,
+        tf : this.fcotxfraisfi,
+         mnf : this.fcomtnfin,
+         cr : this.drfcoef,
+         ly : this.loyer,
+         pr : this.periodicite,
+         dr : this.duree,
+         np : this.nbperiode,
+         mc : this.fcomtcession,
+         mb : this.fcomargebrute,
+         mm : this.fcomargemad,
+        fd : this.fcofrdoss,
+         mn : this.fcomargenette,
+         mo : this.fcomargerev,
+        mp : this.fcomargeprlg,
+        ff : this.fcofraisfi,
+        mf : this.fcomargefinale
+    };
+        $scope.buffeco.fcomtafin = $scope.buffeco.ma+$scope.buffeco.mr;
+        $scope.buffeco.fcomtcommpart= $scope.buffeco.mbf*$scope.buffeco.tp;
+        $scope.buffeco.fcomtcommapport= $scope.buffeco.mbf*$scope.buffeco.ta;
+        $scope.buffeco.fcotxfraisfi=$scope.buffeco.ff/$scope.buffeco.mbf;
+        $scope.buffeco.fcomtnfin= $scope.buffeco.mbf+$scope.buffeco.cp+$scope.buffeco.ca;
+        $scope.buffeco.loyer= $scope.buffeco.cr*$scope.buffeco.mnf;
+        $scope.buffeco.nbperiode = 16;
+        if ($scope.buffeco.pr==='tri') {$scope.buffeco.nbperiode = $scope.buffeco.dr/3;}
+        else {$scope.buffeco.nbperiode = $scope.buffeco.dr;}
+        $scope.buffeco.fcomtcession= $scope.buffeco.ly*$scope.buffeco.np;
+        $scope.buffeco.va= $scope.buffeco.ly*$scope.buffeco.np;
+        $scope.buffeco.fcomargebrute= $scope.buffeco.mc-$scope.buffeco.mnf;
+        $scope.buffeco.fcomargenette= $scope.buffeco.mb+$scope.buffeco.mm+$scope.buffeco.fd-$scope.buffeco.ff;
+        $scope.buffeco.fcomargerev= $scope.buffeco.ma*5/100;
+        $scope.buffeco.fcomargeprlg=4*$scope.buffeco.ly;
+        $scope.buffeco.fcomargefinale=$scope.buffeco.mn+$scope.buffeco.mo+$scope.buffeco.mp;
+
+
+
+//////////////////////////////////////////////////////////////////
+
+
+	// Create new Ecomony
+	$scope.create= function()
+	{
+		// Create new Ecomony object
+		var ecomony = new Ecomonies
+		({
+			name: this.name,
+			bu: this.bu,
+			fieconum: this.fieconum,
+			locataire: this.locataire,
+			refinanceur: this.refinanceur,
+			consultant: this.consultant ,
+			partenaire: this.partenaire,
+			duree: this.duree,
+			periodicite: this.periodicite,
+			nbperiode: this.nbperiode,
+			drfaccord: this.drfaccord,
+			fcomtachat: this.fcomtachat,
+			fcomtrachat: this.fcomtrachat,
+			fcomtafin: this.fcomtafin,
+			fcotxcommpart: this.fcotxcommpart,
+			fcocommpart: this.fcocommpart,
+			fcotxcommapport: this.fcotxcommapport,
+			fcocommapport: this.fcocommapport,
+			fcomtnfin: this.fcomtnfin,
+			drfcoef: this.drfcoef,
+			loyer: this.loyer,
+			fcovaleuract: this.fcovaleuract,
+			drfmtcession: this.drfmtcession,
+			fcomargebrute: this.fcomargebrute,
+			fcomargemad: this.fcomargemad,
+			fcofrdoss: this.fcofrdoss,
+			fcofraisfi: this.fcofraisfi,
+			fcomargenette: this.fcomargenette,
+			fcotxmargenette: this.fcotxmargenette,
+			fcomargerev: this.fcomargerev,
+			fcomargeprlg: this.fcomargeprlg,
+			fcomargefinale: this.fcomargefinale,
+			fcocommentaire:this.fcocommentaire,
+			seletedfco:this.selectedfco,
+			modified: Date.now(),
+			modifier: this.authentication.username
+		});
+
+		// Redirect after save
+		ecomony.$save(function(response) 
+		{
+			$location.path('ecomonies/' + response._id);
+
+			// Clear form fields
+			$scope.name = '';
+			$scope.bu = '';
+			$scope.fieconum = '';
+		 	$scope.locataire = '';
+			 $scope.refinanceur = '';
+			 $scope.consultant  = '';
+			 $scope.partenaire = '';
+			 $scope.duree = '';
+			 $scope.periodicite = '';
+			 $scope.nbperiode = '';
+			 $scope.drfaccord = '';
+			 $scope.fcomtachat = '';
+			 $scope.fcomtrachat = '';
+			 $scope.fcomtafin = '';
+			 $scope.fcotxcommpart = '';
+			 $scope.fcocommpart = '';
+			 $scope.fcotxcommapport = '';
+			 $scope.fcocommapport = '';
+			 $scope.fcomtnfin = '';
+			 $scope.drfcoef = '';
+			 $scope.loyer = '';
+			 $scope.fcovaleuract = '';
+			 $scope.drfmtcession = '';
+			 $scope.fcomargebrute = '';
+			 $scope.fcomargemad = '';
+			 $scope.fcofrdoss = '';
+			 $scope.fcofraisfi = '';
+			 $scope.fcomargenette = '';
+			 $scope.fcotxmargenette = '';
+			 $scope.fcomargerev = '';
+			 $scope.fcomargeprlg = '';
+			 $scope.fcomargefinale = '';
+			$scope.fcocommentaire = '';
+			$scope.selectedfco = '';
+			$scope.modified = Date.now;
+			$scope.modifier= $scope.authentication.username;
+		},
+		function(errorResponse){
+			$scope.error = errorResponse.data.message;
+		}
+		);
+	};
+
+	// Remove existing Ecomony
+	$scope.remove = function(ecomony) {
+		if ( ecomony ) { 
+			ecomony.$remove();
+				for (var i in $scope.ecomonies) {
+					if ($scope.ecomonies [i] === ecomony) {
+						$scope.ecomonies.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.ecomony.$remove(function() {
+					$location.path('ecomonies');
+				});
+			}
+	};
+
+	// Update existing Ecomony
+	$scope.update = function() {
+			var ecomony = $scope.ecomony;
+				ecomony.modified= Date.now();
+				ecomony.modifier= $scope.authentication.username;
+
+			ecomony.$update(function() {
+				$location.path('ecomonies/' + ecomony._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+	};
+
+	$scope.calculate = function() {
+			var ecomony = $scope.ecomony;
+
+
+			ecomony.$calculate(function() {
+				$location.path('ecomonies/' + ecomony._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+	};
+
+
+
+	// Find a list of Ecomonies
+	$scope.find = function() {
+			$scope.ecomonies = Ecomonies.query();
+			// ajout chde
+			$scope.contrats = Contrats.query();
+			$scope.refinancements = Refinancements.query();
+	};
+
+	// Find existing Ecomony
+	$scope.findOne = function() {
+			$scope.ecomony = Ecomonies.get({ 
+				ecomonyId: $stateParams.ecomonyId
+			});
+	};
+
+	//test pour ui grid
+	$scope.listfieco = Ecomonies.query(); 
+
+	$scope.gridOptions = 
+		{
+  	  		data: $scope.listfieco,
+  	  		enableSorting: true,
+  			enableCellEditOnFocus: true,
+  			enableFiltering: true,
+  			visible: true,
+  			columnDefs: 
+  			[ 
+		      	{name: 'bu', displayName: 'BU', width: '40', 
+			        cellClass: function (grid, row, col, rowIndex, colIndex) {
+			          var val = grid.getCellValue(row, col);
+			          if (val === 'EVL') {
+			            return 'blue';
+			          }
+			          else if (val === 'UBS') {
+			            return 'pink';
+			          }
+			          else if (val === 'HBO') {
+			            return 'orange';
+			          }
+			        }
+				},
+   				{ name: '_id', displayName: 'Edt', width: '25', cellTemplate: '<div class="ui-grid-cell-contents"><a href="#!/ecomonies/{{ COL_FIELD }}"><span class="glyphicon glyphicon-eye-open"></span></a></div>',
+   			 enableFiltering: false, enableSorting: false
+				},
+
+    			{ name: 'fieconum', displayName: 'N° Eco', width: '60', color: 'red'},
+    			{ name: 'locataire' , width: '90'},
+    			{ name: 'consultant' , width: '50'},
+    			{ name: 'refinanceur', width: '75'},
+    			{ name: 'partenaire' },
+    			{ name: 'duree', width: '50'  },
+    			{ name: 'periodicite', displayName: 'Per.', width: '50' },
+    			{ name: 'nbperiode', displayName: 'Nb per.' , width: '50' },
+    			{ name: 'loyer' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'drfnum', displayName: '#Drf.', width: '60' },
+    			{ name: 'ctrtnum', displayName: '#Ctrt.', width: '60' },
+ 
+    			{ name: 'fcomtachat' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcomtrachat' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcomtafin' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcocommpart' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcocommapport' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcomtnfin' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'drfmtcession' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcomargebrute' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcomargemad' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcofrdoss' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcofraisfi' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcomargenette' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcomargerev' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcomargeprlg' , width: '75' , cellFilter: 'currency:"€ " : 2' },
+    			{ name: 'fcomargefinale' , width: '75' , cellFilter: 'currency:"€ " : 2' }
+    		],
+
+    		// add on ng grid avancée chde
+ 			enableGridMenu: true,
+    		enableSelectAll: true,
+    		exporterCsvFilename: 'myFile.csv',
+    		exporterPdfDefaultStyle: {fontSize: 9},
+    		exporterPdfTableStyle: {margin: [30, 30, 30, 30]},
+    		exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'red'},
+    		exporterPdfHeader: { text: 'List Contrat Leasboard', style: 'headerStyle' },
+    		exporterPdfFooter: function ( currentPage, pageCount ) {
+      			return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+    		},
+    		exporterPdfCustomFormatter: function ( docDefinition ) {
+     		 	docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
+      			docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
+      			return docDefinition;
+    		},
+    		exporterPdfOrientation: 'portrait',
+    		exporterPdfPageSize: 'LETTER',
+    		exporterPdfMaxGridWidth: 500,
+    		exporterCsvLinkElement: angular.element(document.querySelectorAll('.custom-csv-link-location')),
+    		onRegisterApi: function(gridApi){
+      			$scope.gridApi = gridApi;
+    		}
+  		};
+
+}
+]
+)
+;
+
+/*
+// init variable form
+	// calcul financier 
+/*				var ma : this.fcomtachat;
+		var mr = this.fcomtrachat;
+		this.fcomtafin = ma+mr;
+		var mbf = this.fcomtafin;
+		
+		var tp = ecomony.fcotxcommpart;
+		ecomony.fcomtcommpart= mbf*tp;
+		var cp = ecomony.fcomtcommpart;
+		
+		var ta = $scope.ecomony.fcotxcommapport;
+		$scope.ecomony.fcomtcommapport= mbf*ta;
+		var ca = $scope.ecomony.fcomtcommapport;
+		
+		var ff = $scope.ecomony.fcofraisfi;
+		$scope.ecomony.fcotxfraisfi=ff/mbf;
+		var tf = $scope.ecomony.fcotxfraisfi;
+		
+		$scope.ecomony.fcomtnfin= mbf+cp+ca;
+		var mnf = $scope.ecomony.fcomtnfi;
+		
+		var cr = $scope.ecomony.drfcoef;
+		$scope.ecomony.loyer= cr*mnf;
+		var ly = $scope.ecomony.loyer;
+		
+		var pr = $scope.ecomony.periodicite;
+		var dr = $scope.ecomony.duree;
+		if (pr==='tri') {$scope.ecomony.nbperiode = dr/3;}
+		else {$scope.ecomony.nbperiode = dr;}
+
+		var np = $scope.ecomony.nbperiode;
+		$scope.ecomony.fcomtcession= ly*np;
+		var mc = $scope.ecomony.fcomtcession;
+		
+		$scope.ecomony.fcomargebrute= mc-mnf;
+		var mb = $scope.ecomony.fcomargebrute;
+		
+		var mm = $scope.ecomony.fcomargemad;
+		var fd = $scope.ecomony.fcofrdoss;
+		
+		$scope.ecomony.fcomargenette= mb+mm+fd-ff;
+		var mn = $scope.ecomony.fcomargenette;
+		
+		$scope.ecomony.fcomargerev= ma*5/100;
+		var mo = $scope.ecomony.fcomargerev;
+		
+		$scope.ecomony.fcomargeprlg=4*ly;
+		var mp = $scope.ecomony.fcomargeprlg;
+		
+		$scope.ecomony.fcomargefinale=mn+mo+mp;
+		var mf = $scope.ecomony.fcomargefinale;
+*/

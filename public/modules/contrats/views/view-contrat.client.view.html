@@ -1,0 +1,311 @@
+<section data-ng-controller="ContratsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h2>Contrat: <strong>{{contrat.ctrtnum}}</strong></h2>
+    <h2>Locataire: <strong>{{contrat.locataire}}</strong></h2>
+	</div>
+	<br/>
+
+	<small>
+		<em class="text-muted">
+			Crée le
+			<span data-ng-bind="contrat.created | date:'mediumDate'"></span>
+			par
+			<span data-ng-bind="contrat.user.displayName"></span>
+		</em>
+		<em class="text-muted">
+			Modifié le
+			<span data-ng-bind="contrat.modified | date:'mediumDate'"></span>
+			par
+			<span data-ng-bind="contrat.modifier"></span>
+		</em>
+	</small>
+ 
+ <!-- icones de tete de tableau pour acceder aux fonctions de modification et delete contrat  --> 
+  <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == contrat.user._id))">
+    <a class="btn btn-primary" href="/#!/contrats/{{contrat._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" data-ng-click="remove();">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+
+
+<div class="col-md-12 well">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Generalites</strong></h3>
+ 	  </div>
+  	<div class="panel-body">
+
+<div class="col-md-4">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Acteurs</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      		<li class="list-group-item">Consultant: <span class="pull-right" data-ng-bind="contrat.consultant"></span></li>
+ 	     	<li class="list-group-item">Locataire: <span class="pull-right" data-ng-bind="contrat.locataire"></span></li>
+      		<li class="list-group-item">Partenaire: <span class="pull-right" data-ng-bind="contrat.partenaire"></span></li>
+      		<li class="list-group-item">Refinanceur: <span class="pull-right" data-ng-bind="contrat.refinanceur"></span></li>
+    	</ul>	
+	</div> 
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs" >Contrats Acteurs</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>  
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Contrat</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">Loyer: <span class="pull-right" data-ng-bind="contrat.loyer | currency :' €' "></span></li>
+      <li class="list-group-item">nb période: <span class="pull-right" data-ng-bind="contrat.nbperiode"></span>
+      <li class="list-group-item">Périodicité: <span class="pull-right" data-ng-bind="contrat.periodicite"></span>
+
+      <li class="list-group-item">Durée mois: <span class="pull-right" data-ng-bind="contrat.duree"></span>
+
+    </ul>
+	</div>  
+
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs" >Contrats Données</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>  
+  </div>
+</div>		
+
+<div class="col-md-4">
+ <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>statuts</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">Statut refinancement: <span class="pull-right" data-ng-bind="contrat.etatrefinct" ></span></li>
+     <li class="list-group-item">Statut cession: <span class="pull-right" data-ng-bind="contrat.etatcession" ></span></li>
+     <li class="list-group-item">Statut denonciation: <span class="pull-right" data-ng-bind="contrat.etatdenonc" ></span></li>
+     <li class="list-group-item">Statut cycle de vie: <span class="pull-right" data-ng-bind="contrat.etatvie" ></span></li>
+     <li class="list-group-item">Statut règlements: <span class="pull-right" data-ng-bind="contrat.etatrglt" ></span></li>
+
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs" >Contrats status</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+ <div class="panel panel-info">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Dates Contrat</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">Date signature: <span class="pull-right" data-ng-bind="contrat.ctrtdsignature | date:'dd/MM/yy'" ></span></li>
+      <li class="list-group-item">Date cession: <span class="pull-right" data-ng-bind="contrat.ctrtdcession | date:'dd/MM/yy'" ></span></li>
+      <li class="list-group-item">Date pv: <span class="pull-right" data-ng-bind="contrat.ctrtddebut | date:'dd/MM/yy'" ></span></li>
+      <li class="list-group-item">Date fin: <span class="pull-right" data-ng-bind="contrat.ctrtdfin | date:'dd/MM/yy'" ></span></li>
+      <li class="list-group-item">Date cloture: <span class="pull-right" data-ng-bind="contrat.ctrtdcloture| date:'dd/MM/yy'" ></span></li>
+	<!-- | date:'dd/MM/yy' --> 
+  </div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-info btn-xs" >Contrats Dates</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+ <div class="panel panel-danger">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Dates limite</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">Limite cession: <span class="pull-right" data-ng-bind="contrat.ctrtdcession| date:'dd/MM/yy' " ></span></li>
+      <li class="list-group-item">Limite Date denonc: <span class="pull-right" data-ng-bind="contrat.ctrtddenonc | date:'dd/MM/yy'" ></span></li>
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-danger btn-xs" >Contrats Dates Limites</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+ <div class="panel panel-success">
+    <div class="panel-heading">
+      <h3 class="panel-title" class="col-md-2"><strong>Lien et documents</strong></h3>
+  </div>
+
+    <div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">fiche eco: <span class="pull-right" data-ng-bind="contrat.econum" ></span><a class="btn btn-primary" data-ng-click="remove();">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a></li>
+      <li class="list-group-item">demande refi: <span class="pull-right" data-ng-bind="contrat.drfnum" ></span><a class="btn btn-primary" data-ng-click="remove();">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a></li>
+  </div>
+    <div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-success btn-xs" >Contrat Documents</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+</div>
+<!-- end panel body gal -->
+</div>
+<!-- end panel primary -->
+</div>    
+<!-- end md12 -->
+
+<!-- bloc div commentaire -->
+ <div class="col-md-12 well">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title" class="col-md-2"><strong>Commentaires</strong></h3>
+    </div>
+    <div class="panel-body">
+
+<div class="col-md-12 well" >
+    <div class="col-md-4 well" >
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title" class="col-md-2"><strong>Commentaires Business</strong></h3>
+        </div>
+
+        <div class="panel-body">
+          <ul class="list-group">
+          <li class="list-group-item"><span class="pull-right" data-ng-bind="contrat.ctrtcommentaire" ></span></li>
+        </div>
+
+        <div class="panel-footer clearfix">
+          <div class="pull-right">
+              <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+              <a href="#" class="btn btn-default btn-xs">Retour</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 well" >
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title" class="col-md-2"><strong>Commentaires administratifs</strong></h3>
+        </div>
+        
+        <div class="panel-body">
+          <ul class="list-group">
+          <li class="list-group-item"><span class="pull-right" data-ng-bind="contrat.ctrtcommentaireadm" ></span></li>
+          </ul>
+        </div>  
+        
+        <div class="panel-footer clearfix">
+          <div class="pull-right">
+              <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+              <a href="#" class="btn btn-default btn-xs">Retour</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 well" >
+      <div class="panel panel-danger ">
+        <div class="panel-heading">
+          <h3 class="panel-title" class="col-md-2"><strong>Commentaires reglements</strong></h3>
+        </div>
+
+        <div class="panel-body">
+          <ul class="list-group-item">
+            <span class="pull-right" data-ng-bind="contrat.ctrtcommentairerglt" ></span>
+          </ul>      
+        </div>
+
+        <div class="panel-footer clearfix">
+          <div class="pull-right">
+              <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+              <a href="#" class="btn btn-default btn-xs">Retour</a>
+          </div>
+        </div>
+      </div>
+    </div >
+</div>
+<!-- end well -- >
+<br/>	
+</div></div></div>
+
+
+	<div class="pull-left" data-ng-show="((authentication.user) && (authentication.user._id == contrat.user._id))">
+		<a class="btn btn-primary" href="/#!/refinancements/{{refinancement.drfnum._id}}/edit">
+			<i class="glyphicon glyphicon-euro"> Refi </i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="facturerefi({{contrat._id}});">
+			<i class="glyphicon glyphicon-euro"> Facture refi</i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="factureprorata({{contrat._id}});">
+			<i class="glyphicon glyphicon-credit-card"> Fact prorata</i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="facturedossier({{contrat._id}});">
+			<i class="glyphicon glyphicon-credit-card"> Fact dossier</i>
+		</a>
+	</div>
+
+<br/>
+
+<div class="btn-group" class="pull-right">
+  <button type="button" class="btn btn-primary">Contractualisation</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Mettre en production</a></li>
+    <li><a href="#">Lancer renouvellement</a></li>
+    <li><a href="#">Lancer prolongation</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Lancer cloture</a></li>
+  </ul>
+</div>
+
+<div class="btn-group"class="pull-right">
+  <button type="button" class="btn btn-warning" >Facturation</button>
+  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Lancer facture cession</a></li>
+    <li><a href="#">Lancer facture prorata</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Lancer facture frais dossier</a></li>
+  </ul>
+</div>
+
+</section>

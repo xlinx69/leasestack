@@ -1,0 +1,254 @@
+<section data-ng-controller="RefinancementsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h2>refinancement: <strong>{{refinancement.drfnum}}</strong></h2>
+    <h2>locataire: <strong>{{refinancement.locataire}}</strong></h2>
+
+	</div>
+	<br/>
+
+	<small>
+		<em class="text-muted">
+			Crée le
+			<span data-ng-bind="refinancement.created | date:'mediumDate'"></span>
+			par
+			<span data-ng-bind="refinancement.user.displayName"></span>
+		</em>
+		<em class="text-muted">
+			Modifié le
+			<span data-ng-bind="refinancement.modified | date:'mediumDate'"></span>
+			par
+			<span data-ng-bind="refinancement.modifier.displayname"></span>
+		</em>
+	</small>
+  
+  <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == refinancement.user._id))">
+    <a class="btn btn-primary" href="/#!/refinancements/{{refinancement._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" data-ng-click="remove();">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+
+
+<div class="col-md-12 well">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Generalites</strong></h3>
+ 	</div>
+  	<div class="panel-body">
+
+<div class="col-md-4">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Acteurs</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      		<li class="list-group-item">Consultant: <span class="pull-right" data-ng-bind="refinancement.consultant"></span></li>
+ 	     	<li class="list-group-item">Locataire: <span class="pull-right" data-ng-bind="refinancement.locataire"></span></li>
+      		<li class="list-group-item">Partenaire: <span class="pull-right" data-ng-bind="refinancement.partenaire"></span></li>
+      		<li class="list-group-item">Refinanceur: <span class="pull-right" data-ng-bind="refinancement.refinanceur"></span></li>
+    	</ul>	
+	</div> 
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs" >refinancements Acteurs</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>  
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>refinancement</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">Loyer: <span class="pull-right" data-ng-bind="refinancement.loyer | currency :' €' "></span></li>
+      <li class="list-group-item">Périodicité: <span class="pull-right" data-ng-bind="refinancement.periodicite"></span>
+      <li class="list-group-item">nb période: <span class="pull-right" data-ng-bind="refinancement.nbperiode"></span>
+      <li class="list-group-item">Durée: <span class="pull-right" data-ng-bind="refinancement.duree"></span>
+
+      <li class="list-group-item">Montant cession: <span class="pull-right" data-ng-bind="refinancement.duree"></span>
+
+
+    </ul>
+	</div>  
+
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs" >refinancements Données</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>  
+  </div>
+</div>		
+
+<div class="col-md-4">
+ <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>statuts</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">statut refi: <span class="pull-right" data-ng-bind="refinancement.etatrefinct" ></span></li>
+     <li class="list-group-item">statut cession: <span class="pull-right" data-ng-bind="refinancement.etatcession" ></span></li>
+     <li class="list-group-item">statut denonc: <span class="pull-right" data-ng-bind="refinancement.etatdenonc" ></span></li>
+     <li class="list-group-item">statut vie: <span class="pull-right" data-ng-bind="refinancement.etatvie" ></span></li>
+
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs" >refinancements status</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+ <div class="panel panel-info">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Etat des refinancement</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">status SIEMENS: <span class="pull-right" data-ng-bind="refinancement.stsie" ></span></li>
+      <li class="list-group-item">statut GE: <span class="pull-right" data-ng-bind="refinancement.stgec" ></span></li>
+      <li class="list-group-item">status LEASCOM: <span class="pull-right" data-ng-bind="refinancement.stlea" ></span></li>
+      <li class="list-group-item">status LOREQUIP: <span class="pull-right" data-ng-bind="refinancement.stlrq" ></span></li>
+
+  </div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-info btn-xs" >refinancements status</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+ <div class="panel panel-danger">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Dates limite</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">Limite validite: <span class="pull-right" data-ng-bind="refinancement.ctrtdcession| date:'dd/MM/yy' " ></span></li>
+      <li class="list-group-item">Limite Date denonc: <span class="pull-right" data-ng-bind="refinancement.ctrtddenonc | date:'dd/MM/yy'" ></span></li>
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-danger btn-xs" >refinancements Dates Limites</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+ <div class="panel panel-success">
+    <div class="panel-heading">
+      <h3 class="panel-title" class="col-md-2"><strong>Lien et documents</strong></h3>
+  </div>
+
+    <div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">fiche eco: <span class="pull-right" data-ng-bind="refinancement.econum" ></span><a class="btn btn-primary" data-ng-click="remove();">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a></li>
+      <li class="list-group-item">contrat: <span class="pull-right" data-ng-bind="refinancement.ctrtnum" ></span><a class="btn btn-primary" data-ng-click="remove();">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a></li>
+  </div>
+    <div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-success btn-xs" >refinancement Documents</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+</div>
+<!-- end panel body gal -->
+</div>
+<!-- end panel primary -->
+</div>    
+<!-- end md12 -->
+<div class="col-md-12 well" >
+ <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title" class="col-md-2"><strong>Commentaires</strong></h3>
+  </div>
+
+    <div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item"><span class="pull-right" data-ng-bind="refinancement.commentaire" ></span></li>
+
+  </div>
+    <div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+            <a href="#" class="btn btn-default btn-xs">Retour</a>
+        </div>
+    </div>
+ </div>
+</div  
+<!-- end well -- >
+<br/>	
+
+
+	<div class="pull-left" data-ng-show="((authentication.user) && (authentication.user._id == refinancement.user._id))">
+		<a class="btn btn-primary" href="/#!/refinancements/{{refinancement.drfnum._id}}/edit">
+			<i class="glyphicon glyphicon-send">Demande de refinancement </i>
+		</a>
+		<a class="btn btn-success" data-ng-click="facturerefi({{refinancement._id}});">
+			<i class="glyphicon glyphicon-thumbs-up"> Accord de financement</i>
+		</a>
+		<a class="btn btn-danger" data-ng-click="factureprorata({{refinancement._id}});">
+			<i class="glyphicon glyphicon-thumbs-down"> Refus de financement</i>
+		</a>
+
+	</div>
+
+<br/>
+<div class="btn-group" class="pull-right">
+  <button type="button" class="btn btn-primary">contractualisation</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Mettre en production</a></li>
+    <li><a href="#">Lancer renouvellement</a></li>
+    <li><a href="#">Lancer prolongation</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Lancer cloture</a></li>
+  </ul>
+</div>
+<div class="btn-group"class="pull-right">
+  <button type="button" class="btn btn-warning" >Facturation</button>
+  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Lancer facture cession</a></li>
+    <li><a href="#">Lancer facture prorata</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Lancer facture frais dossier</a></li>
+  </ul>
+</div>
+
+
+</section>

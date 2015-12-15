@@ -1,0 +1,31 @@
+<section data-ng-controller="SocietesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Societes</h1>
+    </div>
+
+<!-- 
+    <div class="list-group">
+        <a data-ng-repeat="societe in societes" data-ng-href="#!/societes/{{societe._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Cree
+				<span data-ng-bind="societe.created | date:'medium'"></span>
+				par
+				<span data-ng-bind="societe.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="societe.name"></h4>
+        </a>
+    </div>
+-->
+
+     <div>
+        <div id="societegrid2" ui-grid="gridOptions" class="grid" ui-grid-selection ui-grid-exporter></div>
+    </div>
+ 
+
+
+
+    <div class="alert alert-warning text-center" data-ng-hide="!societes.$resolved || societes.length">
+    	Aucun Societes n'existe,  creez en un ... <a href="/#!/societes/create"> OK </a>?
+    </div>
+</section>
+

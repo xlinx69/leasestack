@@ -1,0 +1,26 @@
+<section data-ng-controller="RefinancementsController" data-ng-init="find()">
+    <div class="page-header" "well">
+        <h1>Refinancements</h1>
+    </div>
+<!--     <div class="list-group" "well">
+        <a data-ng-repeat="refinancement in refinancements" data-ng-href="#!/refinancements/{{refinancement._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Cree
+				<span data-ng-bind="refinancement.created | date:'medium'"></span>
+				par
+				<span data-ng-bind="refinancement.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="refinancement.name"></h4>
+        </a>
+    </div> -->
+
+    <div class="well">
+        <div id="drfgrid2" ui-grid="gridOptions2" ui-grid-selection ui-grid-exporter></div>
+    </div>
+ 
+
+
+    <div class="alert alert-warning text-center" data-ng-hide="!refinancements.$resolved || refinancements.length">
+    	Aucun Refinancements n'existe,  creez en un ... <a href="/#!/refinancements/create"> OK </a>?
+    </div>
+</section>

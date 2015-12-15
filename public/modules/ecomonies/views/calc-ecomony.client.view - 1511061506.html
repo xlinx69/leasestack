@@ -1,0 +1,86 @@
+<div data-ng-controller="fiecoCtrlr" data-ng-init="resetEco()">
+        <div class="page-header well">
+            <h3><strong>Calcul CALCO</strong></h3>
+        </div>
+        
+    <div class="col-md-6 well ">
+    <form class="form-horizontal" novalidate>
+    <fieldset>
+    <div class="form-group well">
+        <br/>Bu:
+        <input type="text" ng-model="bu" ng-change="calcEco()" />
+        <br/>locataire:
+        <input type="text" ng-model="locataire" ng-change="calcEco()" />
+        <br/>consultant:
+        <input type="text" ng-model="consultant" ng-change="calcEco()" />
+        <br/>Partenaire:
+        <input type="text" ng-model="partenaire" ng-change="calcEco()" />
+        <br/>
+        -----------------------------
+        <br/>Montants des Achats:
+        <input type="number" ng-model="ma" ng-change="calcEco()" />
+        <br/>Montant des Rachats:
+        <input type="number" ng-model="mr" ng-change="calcEco()" />
+        <br/>Montant brut a financer: {{mbf | currency:'€ ':2}}
+        <br/> Taux commission partenaire % :
+        <input type="number" ng-model="tcp" ng-change='calcEco()'>
+        <br/> Montant comm: {{mcp | currency:'€ ':2}}
+        <br/> Taux commission apporteur  % :
+        <input type="number" ng-model="tca" ng-change='calcEco()'>
+        <br/> Montant comm: {{mca | currency:'€ ':2}}
+        <br/> Montant net à financer {{mnf | currency:'€ ':2}}
+
+
+        <br/> Taux frais fi annuel  % :
+        <input type="number" ng-model="tff" ng-change='calcEco()'>
+        <br/> assiette decouvert ff :
+        <input type="number" ng-model="aff" ng-change='calcEco()'>
+        <br/> nb jours decouvert ff:
+        <input type="number" ng-model="njf" ng-change='calcEco()'>
+        <br/> Montant frais financier: {{mff | currency:'€ ':2}}
+        <br/> Frais de dossier:
+        <input type="number" ng-model="mfd" ng-change='calcEco()'>
+
+        <br/> Duree du contrat (mois):
+        <input type="number" ng-model="dum" ng-change='calcEco()'>
+        <br/> Periodicite(m ou t):
+        <input type="text" ng-model="per" ng-change='calcEco()'>
+        <br/> Nb periode :
+        <input type="number" ng-model="npr" ng-change='calcEco()'>
+
+        <br/> coef base: {{cri | currency:'% ':3}}
+        <br/> coef abaque :
+        <input type="number" ng-model="crb" ng-change='calcEco()'>
+        <br/> Taux spread sur coef refi %:
+        <input type="number" ng-model="tms" ng-change='calcEco()'>    
+        <br/> coef net: {{crn | currency:'% ':3}}
+        <br/> -----------------------------------
+
+        <br/> loyer periode: {{loy | currency:'€ ':2}}
+        <br/> valeur actualisee: {{vac | currency:'€ ':2}}
+        <br/> Montant cession:{{mcs| currency:'€ ':2}}
+        <br/> Marge brute: {{mgb | currency:'€ ':2}} -> Taux Marge brute: {{tmb | currency:'% ':2}}
+        <br/> Nb jrs mad :
+        <input type="number" ng-model="njm" ng-change='calcEco()'>
+        <br/> Marge mad: {{mgm | currency:'€ ':2}}
+        <br/> Nb loyer prolong :
+        <input type="number" ng-model="nlp" ng-change='calcEco()'>
+        <br/> Marge prolong: {{mgp | currency:'€ ':2}}
+        <br/> -----------------------------------
+        <br/> Marge globale: {{mgg | currency:'€ ':2}} =>  Taux Marge globale: {{tmg | currency:'% ':2}}<br/>
+        <br/>
+    
+        <button ng-click='calcEco()'>Eval Eco</button>
+        <button ng-click='bufEco()'>Bufferize Eco</button>
+        <button ng-click='resetEco()'>Reset Eco</button>
+    
+    </div>
+    </fieldset>
+    </form>
+
+
+    <pre> {{buffeco |json}}</pre>
+</div>
+</div>
+
+

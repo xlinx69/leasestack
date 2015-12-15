@@ -1,0 +1,219 @@
+<section data-ng-controller="EcomoniesController" data-ng-init="findOne()">
+	<div class="page-header">
+	<div class= "well">	<h2>Fiche Eco: <strong>{{ecomony.fieconum}}</strong> - locataire: <strong>{{ecomony.locataire}}</strong></h2></div><br/>
+
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == ecomony.user._id))">
+    <a class="btn btn-primary" href="/#!/ecomonies/calculate">
+      <i class="glyphicon glyphicon-modal-window"></i>
+    </a>
+    <a class="btn btn-primary" href="/#!/ecomonies/{{ecomony._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Poste de
+			<span data-ng-bind="ecomony.created | date:'mediumDate'"></span>
+			par
+			<span data-ng-bind="ecomony.user.displayName"></span>
+		</em>
+		<em class="text-muted">
+			Modifié le
+			<span data-ng-bind="ecomony.modified | date:'mediumDate'"></span>
+			par
+			<span data-ng-bind="ecomony.modifier.username"></span>
+		</em>
+	</small>
+
+<div class="col-md-12 well">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Generalites</strong></h3>
+ 	</div>
+  	<div class="panel-body">
+
+<div class="col-md-4">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Acteurs</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      		<li class="list-group-item">Consultant: <span class="pull-right" data-ng-bind="ecomony.consultant"></span></li>
+ 	     	<li class="list-group-item">Locataire: <span class="pull-right" data-ng-bind="ecomony.locataire"></span></li>
+      		<li class="list-group-item">Partenaire: <span class="pull-right" data-ng-bind="ecomony.partenaire"></span></li>
+      		<li class="list-group-item">Refinanceur: <span class="pull-right" data-ng-bind="ecomony.refinanceur"></span></li>
+    	</ul>	
+	</div> 
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs" >ecomonys acteurs</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>  
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Ecomony I</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">Loyer: <span class="pull-right" data-ng-bind="ecomony.loyer | currency :' €' "></span></li>
+      <li class="list-group-item">Périodicité: <span class="pull-right" data-ng-bind="ecomony.periodicite"></span>
+      <li class="list-group-item">nb période: <span class="pull-right" data-ng-bind="ecomony.nbperiode"></span>
+      <li class="list-group-item">Durée: <span class="pull-right" data-ng-bind="ecomony.duree"></span>
+
+    </ul>
+	</div>  
+
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs" >Ecomonys datas</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>  
+  </div>
+</div>		
+
+<div class="col-md-4">
+ <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Ecomonie II</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">Montant brut a fin: <span class="pull-right" data-ng-bind="ecomony.fcomtafin | currency :' €' "></span></li>
+     <li class="list-group-item">Montant net a fin: <span class="pull-right" data-ng-bind="ecomony.fcomtnfin | currency :' €' "></span></li>
+     <li class="list-group-item">Valeur actualisée: <span class="pull-right" data-ng-bind="ecomony.fcovaleuract | currency :' €' "></span></li>
+     <li class="list-group-item">Montant cession: <span class="pull-right" data-ng-bind="ecomony.drfmtcession | currency :' €' "></span></li>
+     <li class="list-group-item">Marge brute : <span class="pull-right" data-ng-bind="ecomony.fcomargebrute | currency :' €' "></span></li>
+
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs" >Ecomonie status</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+ <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Ecomonies III</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">Montant achat: <span class="pull-right" data-ng-bind="ecomony.fcomtachat | currency :' €' " ></span></li>
+      <li class="list-group-item">Montant rachat: <span class="pull-right" data-ng-bind="ecomony.fcomtrachat | currency :' €' " ></span></li>
+      <li class="list-group-item">Montant brut a financer: <span class="pull-right" data-ng-bind="ecomony.fcomtafin | currency :' €' " ></span></li>
+      <li class="list-group-item">taux com part: <span class="pull-right" data-ng-bind="ecomony.fcotxcommpart | currency :' %' "</span>%</li>
+      <li class="list-group-item">Montant com part: <span class="pull-right" data-ng-bind="ecomony.fcocommpart | currency :' €' "</span>%</li>
+      <li class="list-group-item">taux com apport: <span class="pull-right" data-ng-bind="ecomony.fcotxcommapport | currency :' %' "</span>%</li>
+       <li class="list-group-item">Montant com apport: <span class="pull-right" data-ng-bind="ecomony.fcocommapport | currency :' €'"</span>%</li>
+      <li class="list-group-item">Montant net a financer: <span class="pull-right" data-ng-bind="ecomony.fcomtnfin | currency :' €' " ></span></li>
+      <li class="list-group-item">Montant cession : <span class="pull-right" data-ng-bind="ecomony.fcomtnfin | currency :' €' " ></span></li>
+	<!-- | date:'dd/MM/yy' --> 
+  </div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs" >Ecomonies Dates</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+ <div class="panel panel-success">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Rentabilite</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+	    <ul class="list-group">
+    	<li class="list-group-item">marge brute: <span class="pull-right" data-ng-bind="ecomony.fcomargebrute | currency :' €' " ></span></li>
+	    <li class="list-group-item">marge nette: <span class="pull-right" data-ng-bind="ecomony.fcomargenette | currency :' €' " ></span></li>
+		<li class="list-group-item">marge mad: <span class="pull-right" data-ng-bind="ecomony.fcomargemad | currency :' €' " ></span></li>
+	    <li class="list-group-item">marge revente: <span class="pull-right" data-ng-bind="ecomony.fcomargerev | currency :' €' " ></span></li>
+	    <li class="list-group-item">marge prolong: <span class="pull-right" data-ng-bind="ecomony.fcomargeprlg | currency :' €' " ></span></li>
+ 	   	<li class="list-group-item">marge totale: <span class="pull-right" data-ng-bind="ecomony.fcomargefinale | currency :' €' " ></span></li>
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-success btn-xs" >Economie Renta</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+ <div class="panel panel-warning">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Flux Financiers</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+	    <ul class="list-group">
+    	<li class="list-group-item">Capital restant du: <span class="pull-right" data-ng-bind="ecomony.crdu | currency :' €' " ></span></li>
+	    <li class="list-group-item">Interet à venir: <span class="pull-right" data-ng-bind="ecomony.fcomargerev | currency :' €' " ></span></li>
+    	<li class="list-group-item">Capital amorti: <span class="pull-right" data-ng-bind="ecomony.camrt | currency :' €' " ></span></li>
+	    <li class="list-group-item">Interets versés: <span class="pull-right" data-ng-bind="ecomony.sint | currency :' €' " ></span></li>
+		<li class="list-group-item">Loyers versés: <span class="pull-right" data-ng-bind="ecomony.sloy | currency :' €' " ></span></li>
+	    <li class="list-group-item">Taux d'avancement: <span class="pull-right" data-ng-bind="ecomony.txavt | currency :' %' " ></span></li>
+ 	   	<li class="list-group-item">Taux amortissement: <span class="pull-right" data-ng-bind="ecomony.txamt | currency :' %' " ></span></li>
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-warning btn-xs" >Economie Renta</a>
+            <a href="#" class="btn btn-default btn-xs">Annuler</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+
+</div>
+<!-- end panel body gal -->
+</div>
+<!-- end panel primary -->
+</div>    
+<!-- end md12 -->
+<div class="col-md-12 well" >
+ <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title" class="col-md-2"><strong>Commentaires</strong></h3>
+  </div>
+
+    <div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item"><span class="pull-right" data-ng-bind="ecomony.fcocommentaire" ></span></li>
+
+  </div>
+    <div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+            <a href="#" class="btn btn-default btn-xs">Retour</a>
+        </div>
+    </div>
+ </div>
+</div  
+<!-- end well -- >
+<br/>	
+
+<!--<pre {{$scope.buffeco() | json }}></pre>
+-->
+
+</section>

@@ -1,0 +1,307 @@
+<section data-ng-controller="SocietesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="societe.stenom | uppercase"></h1><h3>Siren: {{societe.siren}}</h3>
+	</div>
+
+	<small>
+		<em class="text-muted">
+			Poste de
+			<span data-ng-bind="societe.created | date:'mediumDate'"></span>
+			par
+			<span data-ng-bind="societe.user.displayName"></span>
+		</em>
+		<em class="text-muted">
+			Modifié le
+			<span data-ng-bind="societe.modified | date:'mediumDate'"></span>
+			par
+			<span data-ng-bind="societe.modifier.displayName"></span>
+		</em>	</small>
+
+<!-- debut modif -->
+<div class="col-md-12 well">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Generalites</strong></h3>
+ 	</div>
+  	<div class="panel-body">
+<!--   -->
+<div class="col-md-4">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Etat Civil</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">Raison Soc.: <span class="pull-right" data-ng-bind="societe.stenom"></span></li>
+      <li class="list-group-item">Groupe: <span class="pull-right" data-ng-bind="societe.stegrp"></span>
+      <li class="list-group-item">Siren: <span class="pull-right" data-ng-bind="societe.siren"></span>
+      <li class="list-group-item">Forme Soc.: <span class="pull-right" data-ng-bind="societe.steformsoc"></span>
+      <li class="list-group-item">Cap Soc.: <span class="pull-right" data-ng-bind="societe.capsoc  | currency :' €' " ></span></li>
+      <li class="list-group-item">Date creation.: <span class="pull-right" data-ng-bind="societe.stedcreat | date:'dd/MM/yy'"></span>
+    </ul>
+	</div>  
+
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+            <a href="#" class="btn btn-default btn-xs">Retour</a>
+        </div>
+    </div>  
+
+  </div>
+</div>		
+<!--   -->
+<div class="col-md-4">
+ <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Chiffre societe</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">Date cloture: <span class="pull-right" data-ng-bind="societe.stedcloture | date:'dd/MM/yy' " ></span></li>
+      <li class="list-group-item">Fonds propres : <span class="pull-right" data-ng-bind="societe.fondpropre  | currency :' €' " ></span></li>
+      <li class="list-group-item">Ca : <span class="pull-right" data-ng-bind="societe.ctrtdcession  | currency :' €' " ></span></li>
+      <li class="list-group-item">Rn: <span class="pull-right" data-ng-bind="societe.ctrtddebut  | currency :' €' " ></span></li>
+      <li class="list-group-item">Ca n-1: <span class="pull-right" data-ng-bind="societe.can  | currency :' €' " ></span></li>
+      <li class="list-group-item">Rn n-1: <span class="pull-right" data-ng-bind="societe.rnn  | currency :' €' " ></span></li>
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+            <a href="#" class="btn btn-default btn-xs">Retour</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Environnement</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+      		<li class="list-group-item">Consultant: <span class="pull-right" data-ng-bind="societe.consultant"></span></li>
+      		<li class="list-group-item">Partenaire: <span class="pull-right" data-ng-bind="societe.partenaire"></span></li>
+      		<li class="list-group-item">Partenaire: <span class="pull-right" data-ng-bind="societe.partenaire"></span></li>
+      		<li class="list-group-item">Banque princ.: <span class="pull-right" data-ng-bind="societe.banquepal"></span></li>
+ 	     	<li class="list-group-item">Banque second.: <span class="pull-right" data-ng-bind="societe.banquesec"></span></li>
+ 	     	<li class="list-group-item">Refinanceur: <span class="pull-right" data-ng-bind="societe.refinanceur"></span></li>
+    	</ul>	
+	</div> 
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+            <a href="#" class="btn btn-default btn-xs">Retour</a>
+        </div>
+    </div>  
+  </div>
+</div>
+
+<div class="col-md-4">
+ <div class="panel panel-info">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Contacts</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">Mandataire Soc.: <span class="pull-right" data-ng-bind="societe.mandname" ></span></li>
+     <li class="list-group-item">Dir. générale: <span class="pull-right" data-ng-bind="societe.dgname" ></span></li>
+     <li class="list-group-item">Dir. Financiere: <span class="pull-right" data-ng-bind="societe.finame" ></span></li>
+     <li class="list-group-item">Dir. Technique: <span class="pull-right" data-ng-bind="societe.techname" ></span></li>
+     <li class="list-group-item">Resp Comptabilite: <span class="pull-right" data-ng-bind="societe.compname" ></span></li>
+     <li class="list-group-item">Assistante: <span class="pull-right" data-ng-bind="societe.assname" ></span></li>
+
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+            <a href="#" class="btn btn-default btn-xs">Retour</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+
+<div class="col-md-4">
+ <div class="panel panel-info">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Adresse</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">Adresse1: <span class="pull-right" data-ng-bind="societe.steadresse1" ></span></li>
+     <li class="list-group-item">Adresse2: <span class="pull-right" data-ng-bind="societe.steadresse2" ></span></li>
+     <li class="list-group-item">Cp: <span class="pull-right" data-ng-bind="societe.stecp" ></span></li>
+     <li class="list-group-item">Ville: <span class="pull-right" data-ng-bind="societe.steville" ></span></li>
+     <li class="list-group-item">Tel: <span class="pull-right" data-ng-bind="societe.stetel" ></span></li>
+     <li class="list-group-item">Fax: <span class="pull-right" data-ng-bind="societe.stefax" ></span></li>
+     <li class="list-group-item">Mail: <span class="pull-right" data-ng-bind="societe.stemail" ></span></li>
+
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+            <a href="#" class="btn btn-default btn-xs">Retour</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+
+<div class="col-md-4">
+ <div class="panel panel-danger">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Evaluations</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item">Etat bdf: <span class="pull-right" data-ng-bind="societe.etatbdf " ></span></li>
+     <li class="list-group-item">Etat Financier: <span class="pull-right" data-ng-bind="societe.etatfi " ></span></li>
+     <li class="list-group-item">Etat proc.coll.: <span class="pull-right" data-ng-bind="societe.etatpc " ></span></li>
+      <li class="list-group-item">Incidents: <span class="pull-right" data-ng-bind="societe.incident" ></span></li>
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+            <a href="#" class="btn btn-default btn-xs">Retour</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+</div>
+<!-- end panel body gal -->
+</div>
+<!-- end panel primary -->
+</div>    
+<!-- end md12 -->
+<div class="col-md-12 well" >
+ <div class="panel panel-info">
+  	<div class="panel-heading">
+    	<h3 class="panel-title" class="col-md-2"><strong>Commentaires</strong></h3>
+ 	</div>
+
+  	<div class="panel-body">
+    <ul class="list-group">
+     <li class="list-group-item"><span class="pull-right" data-ng-bind="societe.commentaire" ></span></li>
+
+	</div>
+  	<div class="panel-footer clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn btn-primary btn-xs">Plus d'infos</a>
+            <a href="#" class="btn btn-default btn-xs">Retour</a>
+        </div>
+    </div>
+ </div>
+</div>
+
+<!-- end well -- >
+<br/>	
+
+
+<!-- junk
+				$scope.stenom = '';
+				$scope.stegrp = '';
+				$scope.siren = '';
+				$scope.steformsoc = '';
+				$scope.stedcreat = '';
+				$scope.capsoc = '';
+				$scope.stedcloture = '';
+				$scope.ca = '';
+				$scope.can = '';
+				$scope.rn = '';
+				$scope.rnn = '';
+				$scope.banquepal = '';
+				$scope.banquesec = '';
+				$scope.stetype = '';
+				$scope.steadresse1 = '';
+				$scope.steadresse2 = '';
+				$scope.stecp = '';
+				$scope.steville = '';
+				$scope.stetel = '';
+				$scope.stefax = '';
+				$scope.stemail = '';
+				$scope.mandname = '';
+				$scope.mandfonc = '';
+				$scope.finname = '';
+				$scope.compname = '';
+				$scope.dgname = '';
+				$scope.techname = '';
+				$scope.assname = '';
+
+				$scope.etatbdf = '';
+				$scope.etatfi = '';
+				$scope.etatpc = '';
+
+				$scope.consultant = '';
+				$scope.partenaire = '';
+
+				$scope.created = '';
+				$scope.user = '';
+				$scope.modified = '';
+				$scope.modifier = '';
+
+
+end junk -->
+
+
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == societe.user._id))">
+		<a class="btn btn-primary" href="/#!/societes/{{societe._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<div class="pull-left" data-ng-show="((authentication.user) && (authentication.user._id == societe.user._id))">
+		<a class="btn btn-primary" href="/#!/refinancements/{{refinancement.drfnum._id}}/edit">
+			<i class="glyphicon glyphicon-euro"> refi</i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="facturerefi({{societe._id}});">
+			<i class="glyphicon glyphicon-euro"> facture refi</i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="factureprorata({{societe._id}});">
+			<i class="glyphicon glyphicon-credit-card"> fact prorata</i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="facturedossier({{societe._id}});">
+			<i class="glyphicon glyphicon-credit-card"> fact dossier</i>
+		</a>
+	</div>
+
+<br/>
+<div class="btn-group" class="pull-right">
+  <button type="button" class="btn btn-primary">contractualisation</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Mettre en production</a></li>
+    <li><a href="#">Lancer renouvellement</a></li>
+    <li><a href="#">Lancer prolongation</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Lancer cloture</a></li>
+  </ul>
+</div>
+<div class="btn-group"class="pull-left">
+  <button type="button" class="btn btn-warning">Facturation</button>
+  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Lancer facture cession</a></li>
+    <li><a href="#">Lancer facture prorata</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Lancer facture frais dossier</a></li>
+  </ul>
+</div>
+
+</section>

@@ -1,0 +1,13 @@
+<section data-ng-controller="ContratsController" data-ng-init="find()">
+    <div class="page-header">
+        <h2>Liste des contrats</h2>
+    </div>
+
+     <div>
+        <div id="contratgrid2" ui-grid="gridOptions" class="grid" ui-grid-selection ui-grid-exporter></div>
+    </div>
+ 
+    <div class="alert alert-warning text-center" data-ng-hide="!contrats.$resolved || contrats.length">
+    	Aucun Contrats n'existe,  creez en un ... <a href="/#!/contrats/create"> OK </a>?
+    </div>
+</section>
